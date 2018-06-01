@@ -4,11 +4,17 @@
 # assuming that Python3 and Cmake3 are already installed
 export $BASEDIR $HOME/NGserial
 mkdir -p $BASEDIR
-cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve-src
-cd $BASEDIR/ngsolve-src && git submodule update --init --recursive
+cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve
+cd $BASEDIR/ngsolve && git submodule update --init --recursive
 mkdir $BASEDIR/build 
 cd $BASEDIR/build
-cmake -DCMAKE_INSTALL_PREFIX=$BASEDIR -DUSE_MKL=ON -DMKL_ROOT=/opt/intel/mkl -DCMAKE_BUILD_TYPE=Release ../ngsolve/
+cmake \
+  -DCMAKE_INSTALL_PREFIX=$BASEDIR \
+  -DUSE_MKL=ON \
+  -DMKL_ROOT=/opt/intel/mkl
+  -DCMAKE_BUILD_TYPE=Release \
+  $BASEDIR/ngsolve
+
 make -j20
 make install
 

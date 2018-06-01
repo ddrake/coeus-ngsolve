@@ -2,17 +2,16 @@
 
 # Install the current versions of Python3 and Cmake3
 export INSTALL_DIR=$HOME/common/python3
-mkdir -p $INSTALL_DIR; cd $INSTALL_DIR
+mkdir -p $INSTALL_DIR && cd $INSTALL_DIR
 wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz
 tar xvf Python-3.6.5.tgz
 
 export INSTALL_DIR=$HOME/common/cmake3
-mkdir -p $INSTALL_DIR; cd $INSTALL_DIR
+mkdir -p $INSTALL_DIR && cd $INSTALL_DIR
 wget https://cmake.org/files/v3.11/cmake-3.11.3.tar.gz
 tar xvf cmake-3.11.3.tar.gz
 
-# You may want to do this...
-pip3 install numpy
-pip3 install scipy
+# You may want to do this sort of thing...
+pip3 install numpy, scipy, matplotlib, sympy, ipython3
 # etc ...
 

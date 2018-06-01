@@ -2,8 +2,9 @@
 
 # Install the current versions of Python3 and Cmake3
 # in the user's home directory (by default)
-export SRC_DIR=$HOME/common/src
-export INSTALL_DIR=$HOME/common/install
+BASE_DIR=$HOME
+export SRC_DIR=$BASE_DIR/common/src
+export INSTALL_DIR=$BASE_DIR/common/install
 mkdir -p $INSTALL_DIR
 mkdir -p $SRC_DIR
 

@@ -12,6 +12,6 @@ wget https://cmake.org/files/v3.11/cmake-3.11.3.tar.gz
 tar xvf cmake-3.11.3.tar.gz
 
 # You may want to do this sort of thing...
-pip3 install numpy, scipy, matplotlib, sympy, ipython3
+pip3 install numpy scipy matplotlib sympy ipython3
 # etc ...
 

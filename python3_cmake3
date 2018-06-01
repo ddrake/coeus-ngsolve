@@ -1,4 +1,4 @@
-#! usr/bin/bash
+#! /usr/bin/bash
 
 # Install the current versions of Python3 and Cmake3
 # in the user's home directory (by default)

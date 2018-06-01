@@ -1,4 +1,4 @@
-#! usr/bin/bash
+#! /usr/bin/bash
 
 # to set up for parallel ngsolve with openmpi, source this file like this:
 # source use_parallel (or like this: . use_parallel)

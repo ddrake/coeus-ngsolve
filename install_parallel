@@ -1,0 +1,42 @@
+#! /usr/bin/bash
+
+# This script installs Netgen/Ngsolve for parallel processing using openmpi
+# assuming that Python3 and Cmake3 are already installed
+export $BASEDIR=$HOME/NGparallel
+mkdir -p $BASEDIR
+cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve
+cd $BASEDIR/ngsolve && git submodule update --init --recursive
+mkdir $BASEDIR/build 
+cd $BASEDIR/build
+cmake \
+  -DCMAKE_C_COMPILER=$GCC_DIR/bin/gcc \
+  -DCMAKE_CXX_COMPILER=$GCC_DIR/bin/g++ \
+  -DCMAKE_INSTALL_PREFIX=$BASEDIR \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DUSE_GUI=OFF \
+  -DUSE_MPI=ON \
+  -DUSE_MUMPS=ON \
+  -DUSE_HYPRE=ON \
+  -DUSE_MKL=ON \
+  -DMKL_ROOT=/opt/intel/mkl \
+  -DMKL_SDL=OFF \
+  $BASEDIR/ngsolve
+make -j20
+make install
+
+# Now it's necessary to edit the file ngspy,
+# appending :/usr/lib64/libgomp.so.1 to the PRELOAD PATH
+cd $BASEDIR/bin
+
+# After editing should be something like this..
+cat ngspy
+##! /usr/bin/bash
+#LD_PRELOAD=$LD_PRELOAD:/act/openmpi-2.0/gcc-7.2.0/lib/libmpi.so:/opt/intel/mkl/lib/intel64/libmkl_core.so:/opt/intel/mkl/lib/intel64/libmkl_gnu_thread.so:/opt/intel/mkl/lib/intel64/libmkl_intel_lp64.so:/opt/intel/mkl/lib/intel64/libmkl_blacs_openmpi_lp64.so:/usr/lib64/libgomp.so.1 /home/ddrake/common/install/bin/python3 $*
+
+# Test that everything works
+cd $BASEDIR/ngsolve/py_tutorials/mpi/poisson_output
+mpirun -np 5 ngspy mpi_poisson.py
+
+# This should generate a directory poisson_output 
+# with some nonempty vtk files.
+

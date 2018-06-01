@@ -13,7 +13,7 @@ PYTHON_VERSION=Python-$PYTHON_VER_NO
 cd $SRC_DIR
 wget https://www.python.org/ftp/python/$PYTHON_VER_NO/$PYTHON_VERSION.tgz
 tar xvf Python-$PYTHON_VER_NO.tgz
-export BUILD_DIR=$SRC_DIR/python3/$PYTHON_VERSION/build
+export BUILD_DIR=$SRC_DIR/$PYTHON_VERSION/build
 mkdir -p $BUILD_DIR && cd $BUILD_DIR
 ../configure --prefix=$INSTALL_DIR --enable-shared
 make -j10
@@ -25,7 +25,7 @@ CMAKE_VERSION=cmake-$CMAKE_VER_NO
 cd $SRC_DIR
 wget https://cmake.org/files/v$CMAKE_MAJ_NO/$CMAKE_VERSION.tar.gz
 tar xvf $CMAKE_VERSION.tar.gz
-export BUILD_DIR=$SRC_DIR/cmake3/$CMAKE_VERSION/build
+export BUILD_DIR=$SRC_DIR/$CMAKE_VERSION/build
 mkdir -p $BUILD_DIR && cd $BUILD_DIR
 cmake ../ -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR
 make -j10

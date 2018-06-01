@@ -5,6 +5,7 @@ Instructions / scripts for setting up serial and parallel installations of Netge
 Following this installation procedure, you should end up with three
 directories in your home directory something like this:
 
+```
 |
 -- common
   |
@@ -51,7 +52,7 @@ directories in your home directory something like this:
   -- ngsolve
   |
   -- share
-
+```
 
 ### Step 1
 edit your .bashrc to look something like the one here

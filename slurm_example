@@ -25,7 +25,9 @@ export PYTHONPATH=$HOME/fiberamp:$PYTHONPATH
 
 export OMP_NUM_THREADS=20
 
-$HOME/PY3/bin/python3 $HOME/fiberamp/cmt/run_p2_L7_n500.py
+# The local installation of python3 is already in the path
+# so we shouldn't need to specify it.
+python3 $HOME/fiberamp/cmt/run_p2_L7_n500.py
 
 echo "Ending at wall clock time:"
 date

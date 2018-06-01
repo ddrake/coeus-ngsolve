@@ -34,8 +34,8 @@ cat ngspy
 #LD_PRELOAD=$LD_PRELOAD:/act/openmpi-2.0/gcc-7.2.0/lib/libmpi.so:/opt/intel/mkl/lib/intel64/libmkl_core.so:/opt/intel/mkl/lib/intel64/libmkl_gnu_thread.so:/opt/intel/mkl/lib/intel64/libmkl_intel_lp64.so:/opt/intel/mkl/lib/intel64/libmkl_blacs_openmpi_lp64.so:/usr/lib64/libgomp.so.1 /home/ddrake/common/install/bin/python3 $*
 
 # Test that everything works
-cd $BASEDIR/ngsolve/py_tutorials/mpi/poisson_output
-mpirun -np 5 ngspy mpi_poisson.py
+#cd $BASEDIR/ngsolve/py_tutorials/mpi/poisson_output
+#mpirun -np 5 ngspy mpi_poisson.py
 
 # This should generate a directory poisson_output 
 # with some nonempty vtk files.

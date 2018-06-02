@@ -2,7 +2,7 @@
 
 # This script installs Netgen/Ngsolve for serial processing
 # assuming that Python3 and Cmake3 are already installed
-export $BASEDIR $HOME/NGserial
+export $BASEDIR=$HOME/NGserial
 mkdir -p $BASEDIR
 cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve
 cd $BASEDIR/ngsolve && git submodule update --init --recursive
@@ -11,7 +11,7 @@ cd $BASEDIR/build
 cmake \
   -DCMAKE_INSTALL_PREFIX=$BASEDIR \
   -DUSE_MKL=ON \
-  -DMKL_ROOT=/opt/intel/mkl
+  -DMKL_ROOT=/opt/intel/mkl \
   -DCMAKE_BUILD_TYPE=Release \
   $BASEDIR/ngsolve
 

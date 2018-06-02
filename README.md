@@ -6,52 +6,28 @@ Following this installation procedure, you should end up with three
 directories in your home directory something like this:
 
 ```
-|
--- common
-  |
-  -- install
-  | |
-  | -- bin
-  | |
-  | -- doc
-  | |
-  | -- include
-  | |
-  | -- lib
-  | |
-  | -- share
-  |
-  -- src
-    |
-    |-- cmake-3.11.2
-    |
-    |-- Python-3.6.5
-
-|
--- NGparallel
-  |
-  -- bin
-  |
-  -- include
-  |
-  -- lib
-  |
-  -- ngsolve
-  |
-  -- share
-
-|
--- NGserial
-  |
-  -- bin
-  |
-  -- include
-  |
-  -- lib
-  |
-  -- ngsolve
-  |
-  -- share
+.
+├── common
+│   ├── install
+│   │   ├── bin
+│   │   ├── include
+│   │   ├── lib
+│   │   └── share
+│   └── src
+│       ├── cmake-3.11.2
+│       └── Python-3.6.5
+├── NGparallel
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   ├── ngsolve
+│   └── share
+└── NGserial
+    ├── bin
+    ├── include
+    ├── lib
+    ├── ngsolve
+    └── share
 ```
 
 ### Step 1

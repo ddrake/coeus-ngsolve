@@ -2,7 +2,7 @@
 
 # This script installs Netgen/Ngsolve for parallel processing using openmpi
 # assuming that Python3 and Cmake3 are already installed
-export $BASEDIR=$HOME/NGparallel
+export BASEDIR=$HOME/NGparallel
 mkdir -p $BASEDIR
 cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve
 cd $BASEDIR/ngsolve && git submodule update --init --recursive

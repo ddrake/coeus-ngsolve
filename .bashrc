@@ -18,7 +18,7 @@ export LD_LIBRARY_PATH=$COMMON_INSTALL_DIR/lib:/opt/intel/mkl/lib/intel64:$LD_LI
         
 export PATH=$COMMON_INSTALL_DIR/bin:$GCC_DIR/bin/:$PATH
         
-module load openmpi-2.0/gcc-7.2.0
+module load gcc-7.2.0
 
 # Uncomment this if you want to use ngsolve in serial processing by default
 # source use_serial

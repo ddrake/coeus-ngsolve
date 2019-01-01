@@ -6,8 +6,8 @@ git clone https://github.com/NGSolve/ngs-special-functions.git
 cd ngs-special-functions
 # copy over two mpi headers (work around compile error)
 # this directory is in cmake include path, but still get compile error
-cp /act/openmpi-2.0/gcc-7.2.0/include/mpi.h inc/
-cp /act/openmpi-2.0/gcc-7.2.0/include/mpi_portable_platform.h inc/
+cp /act/openmpi-2.0/gcc-8.2.0/include/mpi.h inc/
+cp /act/openmpi-2.0/gcc-8.2.0/include/mpi_portable_platform.h inc/
 mkdir build && cd build
 cmake ..
 # automatically installs during build to your NGSolve installation

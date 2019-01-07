@@ -1,0 +1,30 @@
+#! /usr/bin/bash
+
+# This script updates Netgen/Ngsolve for parallel processing using openmpi
+# assuming that Python3 and Cmake3 are already installed
+
+module load openmpi-2.0/gcc-8.2.0
+module load intel
+
+export BASEDIR=$HOME/NGparallel
+cd $BASEDIR/ngsolve && git pull
+git submodule update --init --recursive
+git submodule sync --recursive
+git submodule update --init --recursive
+
+rm -rf $BASEDIR/build && mkdir $BASEDIR/build && cd $BASEDIR/build
+cmake \
+  -DCMAKE_C_COMPILER=$GCC_DIR/bin/gcc \
+  -DCMAKE_CXX_COMPILER=$GCC_DIR/bin/g++ \
+  -DCMAKE_INSTALL_PREFIX=$BASEDIR \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DUSE_GUI=OFF \
+  -DUSE_MPI=ON \
+  -DUSE_MUMPS=ON \
+  -DUSE_HYPRE=ON \
+  -DUSE_MKL=ON \
+  -DMKL_ROOT=/opt/intel/mkl \
+  -DMKL_SDL=OFF \
+  $BASEDIR/ngsolve
+make -j20
+make install

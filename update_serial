@@ -1,0 +1,29 @@
+#! /usr/bin/bash
+
+# This script updates Netgen/Ngsolve for serial processing
+# assuming that Python3 and Cmake3 are already installed
+
+module load gcc-8.2.0
+module load intel
+
+export BASEDIR=$HOME/NGserial
+cd $BASEDIR && git pull
+cd $BASEDIR/ngsolve 
+git submodule update --init --recursive
+git submodule sync --recursive
+git submodule update --init --recursive
+
+rm -rf $BASEDIR/build && mkdir $BASEDIR/build && cd $BASEDIR/build
+cmake \
+  -DCMAKE_INSTALL_PREFIX=$BASEDIR \
+  -DUSE_MKL=ON \
+  -DMKL_ROOT=/opt/intel/mkl \
+  -DCMAKE_BUILD_TYPE=Release \
+  $BASEDIR/ngsolve
+
+make -j20
+make install
+
+# Test that everything works
+#cd $BASEDIR/ngsolve/py_tutorials
+#netgen poisson.py

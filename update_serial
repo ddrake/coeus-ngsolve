@@ -7,8 +7,7 @@ module load gcc-8.2.0
 module load intel
 
 export BASEDIR=$HOME/NGserial
-cd $BASEDIR && git pull
-cd $BASEDIR/ngsolve 
+cd $BASEDIR/ngsolve && git pull
 git submodule update --init --recursive
 git submodule sync --recursive
 git submodule update --init --recursive

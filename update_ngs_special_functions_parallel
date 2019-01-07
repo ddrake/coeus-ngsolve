@@ -1,0 +1,13 @@
+#! /usr/bin/bash
+source use_parallel
+export BASEDIR=$HOME/NGparallel
+cd $BASEDIR/ngs-special-functions
+git pull
+# copy over two mpi headers (work around compile error)
+# this directory is in cmake include path, but still get compile error
+cp /act/openmpi-2.0/gcc-8.2.0/include/mpi.h inc/
+cp /act/openmpi-2.0/gcc-8.2.0/include/mpi_portable_platform.h inc/
+rm -rf build && mkdir build && cd build
+cmake ..
+# automatically installs during build to your NGSolve installation
+make -j10 

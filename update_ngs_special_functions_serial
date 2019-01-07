@@ -1,0 +1,9 @@
+#! /usr/bin/bash
+source use_serial
+export BASEDIR=$HOME/NGserial
+cd $BASEDIR/ngs-special-functions
+git pull
+rm -rf build && mkdir build && cd build
+cmake ..
+# automatically installs during build to your NGSolve installation
+make -j10 

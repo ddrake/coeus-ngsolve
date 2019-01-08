@@ -19,8 +19,8 @@ mkdir -p $BUILD_DIR && cd $BUILD_DIR
 make -j10
 make install
 
-CMAKE_MAJ_NO=3.11
 CMAKE_VER_NO=3.11.3
+CMAKE_MAJ_NO=${CMAKE_VER_NO%.*}
 CMAKE_VERSION=cmake-$CMAKE_VER_NO
 cd $SRC_DIR
 wget https://cmake.org/files/v$CMAKE_MAJ_NO/$CMAKE_VERSION.tar.gz

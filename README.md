@@ -31,35 +31,38 @@ directories in your home directory something like this:
 ```
 
 ### Step 1
-edit your .bashrc to look something like the one here
+Add the three export lines to your .bashrc so that it is similar to
+the .bashrc file in this repository.
 
 ### Step 2
-run install_cmake3 to install cmake3 in a common directory 
+Run install_cmake3 to install cmake3 in a 'common' directory 
 in your $HOME folder with recent versions of these libraries
 
 ### Step 3
-run install_python3 to install python3 in a common directory 
+run install_python3 to install python3 in a 'common' directory 
 in your $HOME folder with recent versions of these libraries
 
-
 ### Step 3
-run install_parallel to install Netgen/Ngsolve for parallel
-processing using openmpi
+run install_ngsolve_parallel to install Netgen/Ngsolve for parallel
+processing using OpenMPI
 
 ### Step 4
-run install_serial to install Netgen/Ngsolve for serial processing
+run install_ngsolve_serial to install Netgen/Ngsolve for serial processing
 
 ### Step 5
 Depending on your workflow, you will probably want to uncomment one of the
 two lines at the bottom of .bashrc to use serial or parallel by default.
-You can also just switch at any time by doing e.g. source use_parallel
 
-### Step 6
-If you need ngsolve special functions, you can install that using the provided
-script
+If you need NGSolve special functions for serial or parallel mode, 
+you can install the package using those provided scripts.
 
-### Step 7
-You can use update_serial and update_parallel to keep Netgen/Ngsolve updated.
+After a successful initial install, you can use update_serial and 
+update_parallel to keep Netgen/Ngsolve updated.
 
 Also you can re-run the install_python and install_cmake scripts to update
-those pre-requisites.
+those pre-requisites to any desired version.
+
+For convenience, you may want to copy the scripts use_serial and use_parallel
+to your home directory.  Then you can easily switch between the serial and
+parallel NGSolve installations using e.g. $ source use_parallel
+

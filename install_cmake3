@@ -1,0 +1,35 @@
+#! /usr/bin/bash
+
+# Currently the default Cmake version on the Coeus is: 2.8.12.2.
+# The current version of Cmake3 (3.13.2) cannot boostrap from this version.
+# If you are installing for the first time, you should first install
+# Cmake version 3.1.3 and make sure your .bashrc 
+# has been modified to include $HOME/common/bin in your path. 
+# You can check your version using $ cmake --version
+# Then run this script again to install the current version of Cmake3.
+
+if [ "$1" = "" ]; then
+    echo "Please specify the desired version, e.g. 3.13.2"
+    exit 1
+fi
+
+# Install the specified version of Cmake3
+# in the common subdirectory of the user's home directory
+BASE_DIR=$HOME
+export SRC_DIR=$BASE_DIR/common/src
+export INSTALL_DIR=$BASE_DIR/common/install
+mkdir -p $INSTALL_DIR
+mkdir -p $SRC_DIR
+
+CMAKE_VER_NO=$1
+CMAKE_MAJ_NO=${CMAKE_VER_NO%.*}
+CMAKE_VERSION=cmake-$CMAKE_VER_NO
+cd $SRC_DIR
+wget https://cmake.org/files/v$CMAKE_MAJ_NO/$CMAKE_VERSION.tar.gz
+tar xvf $CMAKE_VERSION.tar.gz
+export BUILD_DIR=$SRC_DIR/$CMAKE_VERSION/build
+mkdir -p $BUILD_DIR && cd $BUILD_DIR
+cmake ../ -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR
+make -j10
+make install
+

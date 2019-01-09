@@ -1,14 +1,18 @@
 #! /usr/bin/bash
+if [ "$1" = "" ]; then
+    echo "Please specify the desired version, e.g. 3.7.2"
+    exit 1
+fi
 
-# Install the current versions of Python3 and Cmake3
-# in the user's home directory (by default)
+# Install the specified version of Python3
+# in the common subdirectory of the user's home directory
 BASE_DIR=$HOME
 export SRC_DIR=$BASE_DIR/common/src
 export INSTALL_DIR=$BASE_DIR/common/install
 mkdir -p $INSTALL_DIR
 mkdir -p $SRC_DIR
 
-PYTHON_VER_NO=3.6.5
+PYTHON_VER_NO=$1
 PYTHON_VERSION=Python-$PYTHON_VER_NO
 cd $SRC_DIR
 wget https://www.python.org/ftp/python/$PYTHON_VER_NO/$PYTHON_VERSION.tgz
@@ -16,18 +20,6 @@ tar xvf Python-$PYTHON_VER_NO.tgz
 export BUILD_DIR=$SRC_DIR/$PYTHON_VERSION/build
 mkdir -p $BUILD_DIR && cd $BUILD_DIR
 ../configure --prefix=$INSTALL_DIR --enable-shared
-make -j10
-make install
-
-CMAKE_VER_NO=3.11.3
-CMAKE_MAJ_NO=${CMAKE_VER_NO%.*}
-CMAKE_VERSION=cmake-$CMAKE_VER_NO
-cd $SRC_DIR
-wget https://cmake.org/files/v$CMAKE_MAJ_NO/$CMAKE_VERSION.tar.gz
-tar xvf $CMAKE_VERSION.tar.gz
-export BUILD_DIR=$SRC_DIR/$CMAKE_VERSION/build
-mkdir -p $BUILD_DIR && cd $BUILD_DIR
-cmake ../ -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR
 make -j10
 make install
 

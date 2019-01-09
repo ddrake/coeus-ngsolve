@@ -1,6 +1,9 @@
 #!/usr/bin/bash
 # Slurm Example from Jay, modified for consistency with the other scripts here.
 # Note: The pound signs in front of the SBATCH commands are necessary.
+# Note: This assumes you have specified to use the serial installation 
+#  of NGSolve by placing 'source use_serial' in your .bashrc or executing it
+#  manually.
 
 #SBATCH --job-name run_p2_L7_n500
 #SBATCH --nodes=1                    # Use one node

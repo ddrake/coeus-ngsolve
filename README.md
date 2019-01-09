@@ -34,19 +34,32 @@ directories in your home directory something like this:
 edit your .bashrc to look something like the one here
 
 ### Step 2
-edit and run python3_cmake3 to create a common directory 
+run install_cmake3 to install cmake3 in a common directory 
 in your $HOME folder with recent versions of these libraries
 
 ### Step 3
-edit and run install_parallel to install Netgen/Ngsolve for parallel
+run install_python3 to install python3 in a common directory 
+in your $HOME folder with recent versions of these libraries
+
+
+### Step 3
+run install_parallel to install Netgen/Ngsolve for parallel
 processing using openmpi
 
 ### Step 4
-edit and run install_serial to install Netgen/Ngsolve for serial processing
+run install_serial to install Netgen/Ngsolve for serial processing
 
 ### Step 5
 Depending on your workflow, you will probably want to uncomment one of the
 two lines at the bottom of .bashrc to use serial or parallel by default.
 You can also just switch at any time by doing e.g. source use_parallel
 
- 
+### Step 6
+If you need ngsolve special functions, you can install that using the provided
+script
+
+### Step 7
+You can use update_serial and update_parallel to keep Netgen/Ngsolve updated.
+
+Also you can re-run the install_python and install_cmake scripts to update
+those pre-requisites.

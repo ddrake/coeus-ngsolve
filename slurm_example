@@ -13,20 +13,10 @@ echo "Starting at wall clock time:"
 date
 echo "Running CMT on $SLURM_CPUS_ON_NODE CPU cores"
 
-# These variables should already be set in .bashrc
-#module load gcc-8.2.0
-#export NETGENDIR=$HOME/NGserial/bin
-#export PYTHONPATH=$NETGENDIR/../`python3 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1,0,''))"`:$PYTHONPATH
-#export PATH=$HOME/NGserial/bin:/vol/apps/gcc/gcc-8.2.0/bin/:$PATH
-#export LD_LIBRARY_PATH=$HOME/NGserial/lib:$COMMON_INSTALL_DIR/lib:/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH
-
-
 export PYTHONPATH=$HOME/fiberamp:$PYTHONPATH
 
 export OMP_NUM_THREADS=20
 
-# The local installation of python3 is already in the path
-# so we shouldn't need to specify it.
 python3 $HOME/fiberamp/cmt/run_p2_L7_n500.py
 
 echo "Ending at wall clock time:"

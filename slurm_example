@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 # Slurm Example from Jay, modified for consistency with the other scripts here.
+# Note: The pound signs in front of the SBATCH commands are necessary.
 
 #SBATCH --job-name run_p2_L7_n500
 #SBATCH --nodes=1                    # Use one node

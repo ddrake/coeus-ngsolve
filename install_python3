@@ -1,11 +1,12 @@
 #! /usr/bin/bash
 if [ "$1" = "" ]; then
-    echo "Please specify the desired version, e.g. 3.7.2"
+    echo "Please specify the desired version, e.g. 3.6.8"
     exit 1
 fi
 
 # Install the specified version of Python3
 # in the common subdirectory of the user's home directory
+# Currently NGSolve depends on Python 3.6
 BASE_DIR=$HOME
 export SRC_DIR=$BASE_DIR/common/src
 export INSTALL_DIR=$BASE_DIR/common/install

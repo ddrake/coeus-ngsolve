@@ -1,0 +1,34 @@
+#!/usr/bin/bash
+# Fancier Slurm Example that takes command line arguments passed by 
+# the split_trials bash script. 
+# for more info: https://help.rc.ufl.edu/doc/Using_Variables_in_SLURM_Jobs
+
+#SBATCH --job-name etrial0           # Overridden by split_trials 
+#SBATCH --nodes=1                    # Use one node
+#SBATCH --ntasks=1                   # Run a single task       
+#SBATCH --cpus-per-task=20           # Number of CPU cores per task
+#SBATCH --output=ptrial2.log         # Overridden by split_trials
+
+
+pwd; hostname;
+echo "Starting at wall clock time:"
+date
+echo "Running CMT on $SLURM_CPUS_ON_NODE CPU cores"
+
+export PYTHONPATH=$HOME:$PYTHONPATH
+
+export OMP_NUM_THREADS=20
+
+# The local installation of python3 is already in the path
+# so we shouldn't need to specify it.
+
+echo pp is $pp
+echo doping is $doping
+python3 $HOME/fiberamp/cmt/4TalksPapers/tmgain/estimator_trials.py
+    --results_dir='/scratch/username/fiberamp' \
+    --cache_dir='/scratch/username/fiberamp/solutions' \
+    --doping=$doping --pump_power_idx=$pp
+
+echo "Ending at wall clock time:"
+date
+

@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+echo "Bash version ${BASH_VERSION}..."
+doping=Tm
+
+# unlike Python, range includes lower and upper limits
+for i in {0..18}
+   do
+      sbatch --job-name=$doping$i --output=$HOME/work/output/$doping$i.log \
+             --export=doping=$doping,pp=$i slurm
+done
+

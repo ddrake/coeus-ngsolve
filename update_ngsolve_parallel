@@ -14,8 +14,6 @@ git submodule update --init --recursive
 
 rm -rf $BASEDIR/build && mkdir $BASEDIR/build && cd $BASEDIR/build
 cmake \
-  -DCMAKE_C_COMPILER=$GCC_DIR/bin/gcc \
-  -DCMAKE_CXX_COMPILER=$GCC_DIR/bin/g++ \
   -DCMAKE_INSTALL_PREFIX=$BASEDIR \
   -DCMAKE_BUILD_TYPE=Release \
   -DUSE_GUI=OFF \

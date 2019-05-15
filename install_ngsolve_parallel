@@ -17,12 +17,10 @@ git submodule update --init --recursive
 mkdir $BASEDIR/build 
 cd $BASEDIR/build
 cmake \
-  -DCMAKE_C_COMPILER=$GCC_DIR/bin/gcc \
-  -DCMAKE_CXX_COMPILER=$GCC_DIR/bin/g++ \
   -DCMAKE_INSTALL_PREFIX=$BASEDIR \
   -DCMAKE_BUILD_TYPE=Release \
-  -DUSE_GUI=OFF \
   -DUSE_MPI=ON \
+  -DUSE_GUI=OFF \
   -DUSE_MUMPS=ON \
   -DUSE_HYPRE=ON \
   -DUSE_MKL=ON \

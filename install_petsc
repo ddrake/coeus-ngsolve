@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+
+cd $HOME
+wget http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-3.11.2.tar.gz
+tar -xvf petsc-3.11.2.tar.gz
+mkidir $HOME/local
+cd petsc-3.11.2
+./configure CPP=/usr/bin/cpp COPTFLAGS='-O3 -march=native -mtune=native' CXXOPTFLAGS='-O3 -march=native -mtune=native' \
+            --prefix=$HOME/local/petsc \
+            --with-mpi=1 --with-mpi-dir=/act/openmpi-2.0/gcc-8.2.0 \
+            --with-cxx-dialect=c++11 \
+            --with-metis=1 --download-metis=yes \
+            --with-parmetis=1 --download-parmetis=yes \
+            --with-hypre=1 --download-hypre=yes \
+            --with-blaslapack=1 --with-blaslapack-dir=/opt/intel/mkl \
+            --with-zlib=1 \
+            --with-ml=1 --download-ml=yes \
+            --with-cmake=1 \
+            --with-shared-libraries \
+            --download-sowing-cc=gcc \
+            --download-sowing-cxx=g++ \
+            --download-sowing-cxxcpp=cpp \
+~                                                   

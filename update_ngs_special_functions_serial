@@ -1,5 +1,4 @@
 #! /usr/bin/bash
-source use_serial
 export BASEDIR=$HOME/NGserial
 cd $BASEDIR/ngs-special-functions
 git pull

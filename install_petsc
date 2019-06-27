@@ -10,11 +10,16 @@ cd petsc-3.11.2
             --with-mpi=1 --with-mpi-dir=/act/openmpi-2.0/gcc-8.2.0 \
             --with-cxx-dialect=c++11 \
             --with-metis=1 --download-metis=yes \
+            --download-metis-shared=0 \
             --with-parmetis=1 --download-parmetis=yes \
+            --download-parmetis-shared=0 \
             --with-hypre=1 --download-hypre=yes \
-            --with-blaslapack=1 --with-blaslapack-dir=/opt/intel/mkl \
+            --download-hypre-shared=0 \
+            --with-blaslapack=1 \
+            --with-blaslapack-dir=/opt/intel/mkl \
             --with-zlib=1 \
             --with-ml=1 --download-ml=yes \
+            --download-ml-shared=0 \
             --with-cmake=1 \
             --with-shared-libraries \
             --download-sowing-cc=gcc \

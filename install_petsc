@@ -3,7 +3,7 @@
 cd $HOME
 wget http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-3.11.2.tar.gz
 tar -xvf petsc-3.11.2.tar.gz
-mkidir $HOME/local
+mkdir $HOME/local
 cd petsc-3.11.2
 ./configure CPP=/usr/bin/cpp COPTFLAGS='-O3 -march=native -mtune=native' CXXOPTFLAGS='-O3 -march=native -mtune=native' \
             --prefix=$HOME/local/petsc \

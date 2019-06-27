@@ -3,7 +3,7 @@
 cd $HOME
 wget http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-3.11.2.tar.gz
 tar -xvf petsc-3.11.2.tar.gz
-mkdir $HOME/local
+mkdir -p $HOME/local
 cd petsc-3.11.2
 ./configure CPP=/usr/bin/cpp COPTFLAGS='-O3 -march=native -mtune=native' CXXOPTFLAGS='-O3 -march=native -mtune=native' \
             --prefix=$HOME/local/petsc \
@@ -25,4 +25,7 @@ cd petsc-3.11.2
             --download-sowing-cc=gcc \
             --download-sowing-cxx=g++ \
             --download-sowing-cxxcpp=cpp \
-~                                                   
+
+make PETSC_DIR=$HOME/petsc-3.11.2 PETSC_ARCH=arch-linux2-c-debug all            
+export LD_LIBRARY_PATH=$COMMON_INSTALL_DIR/lib:$PETSC_DIR/lib:/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH
+

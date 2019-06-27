@@ -19,10 +19,10 @@ export COMMON_INSTALL_DIR=~/common/install
 # 'install_petsc' script.
 # Then uncomment the next three lines and merge the 
 # LD_LIBRARY_PATH to include the paths as in the fourth line
-# export PETSC_DIR=$HOME/local/petsc
-# export PETSC_SRC_DIR=$HOME/petsc-3.11.2
+# export PETSC_LIB_DIR=$HOME/local/petsc
+# export PETSC_DIR=$HOME/petsc-3.11.2
 # export PETSC_ARCH=arch-linux2-c-debug
-# export LD_LIBRARY_PATH=$COMMON_INSTALL_DIR/lib:$PETSC_DIR/lib:$PETSC_SRC_DIR/$PETSC_ARCH/lib:/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH
+# export LD_LIBRARY_PATH=$COMMON_INSTALL_DIR/lib:$PETSC_LIB_DIR/lib:$PETSC_DIR/$PETSC_ARCH/lib:/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH
 
 export LD_LIBRARY_PATH=$COMMON_INSTALL_DIR/lib:/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH
 

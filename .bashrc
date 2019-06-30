@@ -28,8 +28,4 @@ export LD_LIBRARY_PATH=$COMMON_INSTALL_DIR/lib:/opt/intel/mkl/lib/intel64:$LD_LI
 
 export PATH=$COMMON_INSTALL_DIR/bin:$PATH
 
-# Uncomment this if you want to use ngsolve in serial processing by default
-#source use_serial
-
-# Uncomment this if you want to use ngsolve in parallel processing by default
-# source use_parallel
+module use --append $HOME/privatemodules

@@ -13,6 +13,8 @@ if [ "$1" = "" ]; then
     exit 1
 fi
 
+load module gcc-8.2.0
+
 # Install the specified version of Cmake3
 # in the common subdirectory of the user's home directory
 BASE_DIR=$HOME

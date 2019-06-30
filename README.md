@@ -31,12 +31,21 @@ directories in your home directory something like this:
 ```
 
 ### Step 1
-Add the three export lines to your .bashrc so that it is similar to
-the .bashrc file in this repository.
+
+Set up to use private modules (some useful module files are provided in the
+privatemodules folder here):
+
+```
+mkdir $HOME/privatemodules
+cp ${MODULESHOME}/modulefiles/null $HOME/privatemodules
+```
+Add this line to your .bashrc file:
+`module use --append $HOME/privatemodules`
 
 ### Step 2
 Run install_cmake3 to install cmake3 in a 'common' directory 
-in your $HOME folder with recent versions of these libraries
+in your $HOME folder with recent versions of these libraries.
+Read the comments in this script for more information.
 
 ### Step 3
 run install_python3 to install python3 in a 'common' directory 
@@ -47,11 +56,7 @@ run install_ngsolve_parallel to install Netgen/Ngsolve for parallel
 processing using OpenMPI
 
 ### Step 4
-run install_ngsolve_serial to install Netgen/Ngsolve for serial processing
-
-### Step 5
-Depending on your workflow, you will probably want to uncomment one of the
-two lines at the bottom of .bashrc to use serial or parallel by default.
+run install_ngsolve_serial to install Netgen/Ngsolve for serial processing.
 
 If you need NGSolve special functions for serial or parallel mode, 
 you can install the package using those provided scripts.
@@ -62,7 +67,7 @@ update_parallel to keep Netgen/Ngsolve updated.
 Also you can re-run the install_python and install_cmake scripts to update
 those pre-requisites to any desired version.
 
-For convenience, you may want to copy the scripts use_serial and use_parallel
-to your home directory.  Then you can easily switch between the serial and
-parallel NGSolve installations using e.g. $ source use_parallel
+You can easily switch between the serial and parallel NGSolve installations
+e.g. `$ module load ngsolve/parallel` using the module scripts in
+privatemodules.
 

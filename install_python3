@@ -4,6 +4,8 @@ if [ "$1" = "" ]; then
     exit 1
 fi
 
+module load gcc-8.2.0
+
 # Install the specified version of Python3
 # in the common subdirectory of the user's home directory
 # Currently NGSolve depends on Python 3.6
@@ -25,6 +27,9 @@ make -j10
 make install
 
 # You may want to do this sort of thing...
-#pip3 install numpy scipy matplotlib sympy ipython3
+#pip3 install numpy scipy matplotlib sympy ipython
 # etc ...
+
+# If you want to use mpi4py, you can pip install that too
+# but first do this: module load openmpi-2.0/gcc-8.2.0
 

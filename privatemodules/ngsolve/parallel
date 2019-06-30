@@ -1,8 +1,8 @@
 #%Module1.0#####################################################################
 ##
-## null modulefile
+## NGSolve Parallel modulefile
 ##
-## modulefiles/null.  Generated from null.in by configure.
+## ngsolve/parallel
 ##
 proc ModulesHelp { } {
         global version

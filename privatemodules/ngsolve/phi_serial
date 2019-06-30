@@ -1,8 +1,8 @@
 #%Module1.0#####################################################################
 ##
-## null modulefile
+## NGSolve serial on phi modulefile
 ##
-## modulefiles/null.  Generated from null.in by configure.
+## ngsolve/phi_serial
 ##
 proc ModulesHelp { } {
         global version

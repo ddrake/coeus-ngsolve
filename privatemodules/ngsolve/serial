@@ -1,8 +1,8 @@
 #%Module1.0#####################################################################
 ##
-## null modulefile
+## NGSolve serial modulefile
 ##
-## modulefiles/null.  Generated from null.in by configure.
+## ngsolve/serial
 ##
 proc ModulesHelp { } {
         global version

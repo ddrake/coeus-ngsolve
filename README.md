@@ -68,6 +68,7 @@ Netgen/Ngsolve for serial processing.
 run install_ngsolve_parallel to install the latest version of
 Netgen/Ngsolve for parallel processing using OpenMPI
 
+### Finally
 If you need NGSolve special functions for serial or parallel mode, 
 you can install the package using those provided scripts.
 

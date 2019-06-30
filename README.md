@@ -32,14 +32,18 @@ directories in your home directory something like this:
 
 ### Step 1
 
-Set up to use private modules (some useful module files are provided in the
-privatemodules folder here):
+Set up to use private modules:
 
 ```
 mkdir $HOME/privatemodules
 cp ${MODULESHOME}/modulefiles/null $HOME/privatemodules
 ```
-Add this line to your .bashrc file:
+The second line is just to show you how to generate an empty module file 
+that can you can modify as needed. You can delete it if you like.  Some 
+useful module files are provided in the privatemodules folder in this
+repository.  To have these modules show up when you do `module avail`
+Just add this line to your .bashrc file:
+
 `module use --append $HOME/privatemodules`
 
 ### Step 2

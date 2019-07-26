@@ -1,5 +1,9 @@
 #! /usr/bin/bash
-source use_serial
+
+module load gcc-8.2.0
+module load intel
+module load ngsolve/serial
+
 export BASEDIR=$HOME/NGserial
 cd $BASEDIR
 git clone https://github.com/NGSolve/ngs-special-functions.git

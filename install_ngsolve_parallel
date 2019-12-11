@@ -3,7 +3,7 @@
 # This script installs Netgen/Ngsolve for parallel processing using openmpi
 # assuming that Python3 and Cmake3 are already installed
 
-module load openmpi-2.0/gcc-8.2.0
+module load openmpi-2.0/gcc-9.2.0
 module load intel
 
 export BASEDIR=$HOME/NGparallel

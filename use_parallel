@@ -3,7 +3,7 @@
 # to set up for parallel ngsolve with openmpi, source this file like this:
 # source use_parallel (or like this: . use_parallel)
 
-module load openmpi-2.0/gcc-8.2.0
+module load openmpi-2.0/gcc-9.2.0
 
 export NETGENDIR=$HOME/NGparallel/bin
 export PATH=$NETGENDIR:$PATH

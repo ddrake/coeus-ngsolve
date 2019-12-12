@@ -21,6 +21,9 @@ export PYTHONPATH=$HOME/fiberamp:$PYTHONPATH
 
 export OMP_NUM_THREADS=20
 
+module load gcc-9.2.0
+module load ngsolve/serial
+
 python3 $HOME/fiberamp/cmt/run_p2_L7_n500.py
 
 echo "Ending at wall clock time:"

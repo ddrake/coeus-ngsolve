@@ -16,6 +16,7 @@ rm -rf $BASEDIR/build && mkdir $BASEDIR/build && cd $BASEDIR/build
 cmake \
   -DCMAKE_INSTALL_PREFIX=$BASEDIR \
   -DUSE_MKL=ON \
+  -DUSE_UMFPACK=ON \
   -DMKL_ROOT=/opt/intel/mkl \
   -DCMAKE_BUILD_TYPE=Release \
   $BASEDIR/ngsolve

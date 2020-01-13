@@ -18,10 +18,11 @@ cd $BASEDIR/build
 cmake \
   -DCMAKE_INSTALL_PREFIX=$BASEDIR \
   -DUSE_MKL=ON \
-  -DUSE_UMFPACK=ON \
   -DMKL_ROOT=/opt/intel/mkl \
   -DCMAKE_BUILD_TYPE=Release \
   $BASEDIR/ngsolve
+
+#-DUSE_UMFPACK=ON \   # possible seg faults with both MKL and UMFPACK on
 
 make -j20
 make install

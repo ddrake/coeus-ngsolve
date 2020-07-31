@@ -1,4 +1,4 @@
-#! /usr/bin/bash
+#!/bin/env bash
 
 # This script installs Netgen/Ngsolve for parallel processing using openmpi
 # assuming that Python3 and Cmake3 are already installed

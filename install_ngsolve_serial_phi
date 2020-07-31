@@ -1,4 +1,4 @@
-#! /usr/bin/bash
+#! /bin/env bash
 
 # This script installs Netgen/Ngsolve for serial processing on a phi node
 # assuming that Python3 and Cmake3 are already installed

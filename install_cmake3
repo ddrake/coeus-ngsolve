@@ -1,4 +1,4 @@
-#! /usr/bin/bash
+#!/bin/env bash
 
 # Currently the default Cmake version on the Coeus is: 2.8.12.2.
 # The current version of Cmake3 (3.13.2) cannot boostrap from this version.

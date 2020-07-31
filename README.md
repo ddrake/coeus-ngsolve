@@ -64,7 +64,10 @@ cmake version 3.1.3
 
 Now you're ready to install the latest CMake by running the install script again, e.g.
 
-`./install_cmake3 3.18.1` (or whatever is the current version)
+`./install_cmake3 3.17.1` (or whatever is your preferred version)
+
+Cmake 3.18.1 gave an error with gcc-9.2.0 that it doesn't support enough C++ 11 but 3.17.1 compiled correctly with gcc-9.2.0.  That gcc is currently the most recent on the Coeus or Gaia.
+
 
 Read the comments in the `install_cmake3` script for more information.
 CMake versions for download are listed here: 
@@ -74,8 +77,7 @@ CMake versions for download are listed here:
 run `install_python3` to install python3 in a 'common' directory 
 in your $HOME folder with recent versions of these libraries.
 Python versions for download are listed here:
-[https://www.python.org/downloads/].  Note that 3.7.x is not supported
-by NGSolve yet.  It's recommended to install the latest 3.6 version.
+[https://www.python.org/downloads/].  Version 3.8.3 should be good.
 
 ### Step 3
 run `install_ngsolve_serial` to install the latest version of

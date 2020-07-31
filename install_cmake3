@@ -1,19 +1,20 @@
 #!/bin/env bash
 
 # Currently the default Cmake version on the Coeus is: 2.8.12.2.
-# The current version of Cmake3 (3.13.2) cannot boostrap from this version.
+# The current version of Cmake3 (3.18.1) cannot boostrap from this version.
 # If you are installing for the first time, you should first install
 # Cmake version 3.1.3 and make sure your .bashrc 
 # has been modified to include $HOME/common/bin in your path. 
 # You can check your version using $ cmake --version
-# Then run this script again to install the current version of Cmake3.
+# Then run this script again to install your preferred version of Cmake3.
+# Cmake 3.18.1 gave an error with gcc-9.2.0 that it doesn't support enough C++ 11 but 3.17.1 compiled correctly with gcc-9.2.0.  That gcc is currently the most recent on the Coeus or Gaia
 
 if [ "$1" = "" ]; then
     echo "Please specify the desired version, e.g. 3.13.2"
     exit 1
 fi
 
-load module gcc-8.2.0
+module load gcc-9.2.0
 
 # Install the specified version of Cmake3
 # in the common subdirectory of the user's home directory
@@ -31,7 +32,7 @@ wget https://cmake.org/files/v$CMAKE_MAJ_NO/$CMAKE_VERSION.tar.gz
 tar xvf $CMAKE_VERSION.tar.gz
 export BUILD_DIR=$SRC_DIR/$CMAKE_VERSION/build
 mkdir -p $BUILD_DIR && cd $BUILD_DIR
-cmake ../ -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR
+cmake ../ -DCMAKE_USE_OPENSSL=OFF -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR
 make -j10
 make install
 

@@ -4,26 +4,32 @@
 # assuming that Python3 and Cmake3 are already installed
 
 module load gcc-9.2.0
+module load intel-18.0
 
 export BASEDIR=$HOME/NGserial
-mkdir -p $BASEDIR
-cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve
-cd $BASEDIR/ngsolve
-git submodule update --init --recursive
-git submodule sync --recursive
-git submodule update --init --recursive
+export BUILDDIR=$BASEDIR/build
+export SRCDIR=$BASEDIR/ngsolve
 
-mkdir $BASEDIR/build 
-cd $BASEDIR/build
+if [ ! -d $SRCDIR ]; then
+    mkdir -p $BASEDIR 
+    cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve
+fi
+
+cd $SRCDIR
+git submodule update --init --recursive
+if [ -d $BUILDDIR ]; then
+   rm -rf $BUILDDIR
+fi
+mkdir -p $BUILDDIR 
+cd $BUILDDIR
 cmake \
   -DCMAKE_INSTALL_PREFIX=$BASEDIR \
   -DUSE_MKL=ON \
-  -DUSE_UMFPACK=ON \
-  -DMKL_ROOT=/opt/intel/mkl \
   -DCMAKE_BUILD_TYPE=Release \
   $BASEDIR/ngsolve
 
-#-DUSE_UMFPACK=ON \   # possible seg faults with both MKL and UMFPACK on
+#  -DMKL_ROOT=/opt/intel/mkl \ # bad path and seems we do not need this
+#  -DUSE_UMFPACK=ON \   # possible seg faults with both MKL and UMFPACK on
 
 make -j20
 make install

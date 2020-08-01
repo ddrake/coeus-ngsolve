@@ -32,7 +32,7 @@ wget https://cmake.org/files/v$CMAKE_MAJ_NO/$CMAKE_VERSION.tar.gz
 tar xvf $CMAKE_VERSION.tar.gz
 export BUILD_DIR=$SRC_DIR/$CMAKE_VERSION/build
 mkdir -p $BUILD_DIR && cd $BUILD_DIR
-cmake ../ -DCMAKE_USE_OPENSSL=OFF -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR
+cmake ../ -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR
 make -j10
 make install
 

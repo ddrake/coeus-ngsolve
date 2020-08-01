@@ -64,10 +64,9 @@ cmake version 3.1.3
 
 Now you're ready to install the latest CMake by running the install script again, e.g.
 
-`./install_cmake3 3.17.1` (or whatever is your preferred version)
+`./install_cmake3 3.14.5` (or whatever is your preferred version)
 
-Cmake 3.18.1 gave an error with gcc-9.2.0 that it doesn't support enough C++ 11 but 3.17.1 compiled correctly with gcc-9.2.0.  That gcc is currently the most recent on the Coeus or Gaia.
-
+Cmake 3.18.1 gave an error with gcc-9.2.0 that it doesn't support enough C++ 11; 3.17.1 didn't have a problem with gcc, but refused to use openssl 1.0.2.  I ended up installing 3.14.5.
 
 Read the comments in the `install_cmake3` script for more information.
 CMake versions for download are listed here: 

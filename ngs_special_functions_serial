@@ -1,8 +1,12 @@
 #!/bin/env bash
 
 module load gcc-9.2.0
-module load intel
 module load ngsolve/serial
+
+# You may need one of these depending on how you built ngsolve and 
+# which cluster you are on.
+# module load intel-18.0
+# module load intel
 
 export BASEDIR=$HOME/NGserial
 cd $BASEDIR

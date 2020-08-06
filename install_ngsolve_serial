@@ -4,7 +4,7 @@
 # assuming that Python3 and Cmake3 are already installed
 
 module load gcc-9.2.0
-module load intel-18.0
+# module load intel-18.0
 
 export BASEDIR=$HOME/NGserial
 export BUILDDIR=$BASEDIR/build
@@ -24,12 +24,14 @@ mkdir -p $BUILDDIR
 cd $BUILDDIR
 cmake \
   -DCMAKE_INSTALL_PREFIX=$BASEDIR \
-  -DUSE_MKL=ON \
+  -DUSE_UMFPACK=ON \
   -DCMAKE_BUILD_TYPE=Release \
   $BASEDIR/ngsolve
 
+#  -DUSE_MKL=ON \
 #  -DMKL_ROOT=/opt/intel/mkl \ # bad path and seems we do not need this
 #  -DUSE_UMFPACK=ON \   # possible seg faults with both MKL and UMFPACK on
+#  -DUSE_PARDISO=ON \   # can't find pardiso on Gaia
 
 make -j20
 make install

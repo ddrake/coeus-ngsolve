@@ -38,13 +38,16 @@ directories in your home directory something like this:
 
 ### Step 1
 
-Edit the file `$HOME/.ssh/authorized_keys`, adding the SSH key for your local machine.
+Edit the file on the cluster: `~/.ssh/authorized_keys`, adding the SSH key for your local machine.
 This will allow you to use ssh and sftp without having to enter a password each time.
+
+Also, while you're at it, locate the public key file on the cluster: `~/.ssh/id_rsa_pub` and paste its contents to your GitHub and Bitbucket accounts so you can work with your repositories on the cluster without having to enter passwords.
 
 ### Step 2
 
-Edit the file `~/.bashrc` using nano, vim or emacs, adding the following lines.  If you
-don't know any of these editors, use `nano ~/.bashrc`.  Uncomment the line for the cluster you are on.  The `$CLUSTER` variable is used by several scripts.
+Edit the file `~/.bashrc` using nano, vim or emacs, pasting in the following lines.  If you
+don't know any of these editors, use `nano ~/.bashrc`.
+  Uncomment the line for the cluster you are setting up.  The `$CLUSTER` variable is used by several scripts.
 
 ```
 # export CLUSTER="GAIA"
@@ -117,7 +120,17 @@ pip3 install ipython numpy scipy sympy matplotlib pytest cxroots
 
 ### Step 6
 
-Add private modules:
+Create a local directory where you will put Python projects.
+
+```
+mkdir ~/local
+cd ~/local
+git clone https://bitbucket.org/jayggg/pyeigfeast.git
+```
+
+### Step 7
+
+Add private modules, depending on which cluster you are on:
 
 ```
 cp -r $HOME/coeus_ngsolve/privatemodules_coeus $HOME/privatemodules
@@ -128,7 +141,7 @@ or
 cp -r $HOME/coeus_ngsolve/privatemodules_gaia $HOME/privatemodules
 ```
 
-Edit the last line of each of the module files to ensure that the Python minor version (e.g. 3.8) associated with NGSolve matches the version you installed in Step 4.
+Check the last line of each of the module files to ensure that the Python minor version (e.g. 3.8) associated with NGSolve matches the version you installed in Step 4.
  
 The modules `ngsolve/serial`, `ngsolve/parallel` and `ngsolve/phi_serial` should now appear if you type `module avail`
 
@@ -136,8 +149,7 @@ The modules `ngsolve/serial`, `ngsolve/parallel` and `ngsolve/phi_serial` should
 
 Open `install_ngsolve_serial` in an editor to make sure the cmake command is to your liking.  The Pardiso sparse solver is recommended, but does not appear to be available on Gaia.  On Gaia, UMFPack should be enabled instead.
 
-run `install_ngsolve_serial` to install the latest version of
-Netgen/Ngsolve for serial processing.
+run `install_ngsolve_serial` to install Netgen/Ngsolve for most purposes.
 
 To test the install, first do
 `module load ngsolve/serial`
@@ -149,29 +161,30 @@ Then open a python or ipython console and try
 ### Step 6
 
 Make sure the `module load` commands above are present in your slurm batch script
-Sample 'slurm_coeus' and 'slurm_gaia' scripts are provided here.  Then submit your job like this:
+Sample 'slurm_coeus' and 'slurm_gaia' scripts are provided here.  Create a working directory and copy one of these into it and edit as needed.  Then submit your job like this:
 `sbatch slurm_gaia`
+
+Search the web for more slurm commands.
 
 ### Updating
 
 To update NGSolve, simply delete the NGserial tree using `rm -rf NGserial`,
  and re-run `./install_ngsolve_serial`
 
-Also you can re-run the `install_python` and `install_cmake` scripts at any time to update
+You can re-run the `install_python` and `install_cmake` scripts at any time to update
 those pre-requisites to any desired version.  It's not necessary to delete the previous
 versions of these.
 
 ### Optional items
 
+If you need NGSolve special functions, 
+you can install that package using the provided scripts.
+
 If you need to use NGSolve's capabilities for splitting the mesh among
- multiple MPI processes, run `./install_ngsolve_parallel`. 
+ multiple MPI processes, run `./install_ngsolve_parallel`.  This will create a directory NGparallel.  You can use  `module load ngsolve/parallel` to set paths in your scripts. 
 
-If you need NGSolve special functions for serial or parallel mode, 
-you can install the package using those provided scripts.
-
-You can easily switch between the serial and parallel NGSolve installations
-e.g. `$ module load ngsolve/parallel` using the module scripts in
-privatemodules.
+Private modules make it easy to switch between the serial and parallel NGSolve
+ installations or schedule jobs simultaneously in each context.
 
 ### Additional scripts
 

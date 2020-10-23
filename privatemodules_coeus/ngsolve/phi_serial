@@ -1,0 +1,26 @@
+#%Module1.0#####################################################################
+##
+## NGSolve serial on phi modulefile
+##
+## ngsolve/phi_serial
+##
+proc ModulesHelp { } {
+        global version
+
+        puts stderr "\tThis module sets the environment for"
+        puts stderr "\tthe xeon phi serial compile of NGSolve"
+	    puts stderr "\tin $HOME/NGserialPhi."
+        puts stderr "\n\tVersion $version\n"
+}
+
+module-whatis	"This module sets the environment for serial NGSolve for phi"
+
+# for Tcl script use only
+set     version      "3.2.10"
+set     topdir       /home/ddrake/NGserialPhi
+
+setenv          NETGENDIR       $topdir/bin
+prepend-path    PATH            $topdir/bin
+prepend-path    LD_LIBRARY_PATH $topdir/lib
+prepend-path    PYTHONPATH      $topdir/lib/python3.8/site-packages
+

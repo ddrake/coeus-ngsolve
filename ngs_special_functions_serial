@@ -3,10 +3,11 @@
 module load gcc-9.2.0
 module load ngsolve/serial
 
-# You may need one of these depending on how you built ngsolve and 
-# which cluster you are on.
-# module load intel-18.0
-# module load intel
+if [ $CLUSTER == "GAIA" ]; then
+	module load intel-18.0
+else
+	module load intel
+fi
 
 export BASEDIR=$HOME/NGserial
 cd $BASEDIR

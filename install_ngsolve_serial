@@ -4,7 +4,7 @@
 # assuming that Python3 and Cmake3 are already installed
 
 module load gcc-9.2.0
-# module load intel-18.0
+module load intel-18.0
 
 export BASEDIR=$HOME/NGserial
 export BUILDDIR=$BASEDIR/build
@@ -22,20 +22,27 @@ if [ -d $BUILDDIR ]; then
 fi
 mkdir -p $BUILDDIR 
 cd $BUILDDIR
+
+if [ $CLUSTER == "GAIA" ]; then
 cmake \
   -DCMAKE_INSTALL_PREFIX=$BASEDIR \
+  -DMKL_ROOT=/vol/apps/compilers/intel/2018/compilers_and_libraries_2018.1.163/linux/mkl \
+  -DUSE_MKL=ON \
+  -DUSE_UMFPACK=ON \  # still can't find pardiso on Gaia
+  -DCMAKE_BUILD_TYPE=Release \
+  $BASEDIR/ngsolve
+else
+cmake \
+  -DCMAKE_INSTALL_PREFIX=$BASEDIR \
+  -DMKL_ROOT=/opt/intel/mkl \
+  -DUSE_MKL=ON \
+  -DUSE_PARDISO=ON \
   -DUSE_UMFPACK=ON \
   -DCMAKE_BUILD_TYPE=Release \
   $BASEDIR/ngsolve
-
-#  -DUSE_MKL=ON \
-#  -DMKL_ROOT=/opt/intel/mkl \ # bad path and seems we do not need this
-#  -DUSE_UMFPACK=ON \   # possible seg faults with both MKL and UMFPACK on
-#  -DUSE_PARDISO=ON \   # can't find pardiso on Gaia
+fi
+# Note: seg faults are possible with both MKL and UMFPACK on
 
 make -j20
 make install
 
-# Test that everything works
-# $ cd $BASEDIR/ngsolve/py_tutorials
-# $ netgen poisson.py

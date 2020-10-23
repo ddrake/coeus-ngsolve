@@ -145,7 +145,7 @@ Check the last line of each of the module files to ensure that the Python minor 
  
 The modules `ngsolve/serial`, `ngsolve/parallel` and `ngsolve/phi_serial` should now appear if you type `module avail`
 
-### Step 7
+### Step 8
 
 Open `install_ngsolve_serial` in an editor to make sure the cmake command is to your liking.  The Pardiso sparse solver is recommended, but does not appear to be available on Gaia.  On Gaia, UMFPack should be enabled instead.
 
@@ -158,7 +158,7 @@ To test the install, first do
 Then open a python or ipython console and try
 `import ngsolve`
 
-### Step 6
+### Step 9
 
 Make sure the `module load` commands above are present in your slurm batch script
 Sample 'slurm_coeus' and 'slurm_gaia' scripts are provided here.  Create a working directory and copy one of these into it and edit as needed.  Then submit your job like this:

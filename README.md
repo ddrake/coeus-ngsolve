@@ -115,8 +115,10 @@ Python versions for download are listed here:
 
 ### Step 5 
 
+```
 pip3 install --update pip
 pip3 install ipython numpy scipy sympy matplotlib pytest cxroots
+```
 
 ### Step 6
 
@@ -168,7 +170,7 @@ Search the web for more slurm commands.
 
 ### Updating
 
-To update NGSolve, simply delete the NGserial tree using `rm -rf NGserial`,
+To update NGSolve, simply delete the NGserial directory tree using `rm -rf NGserial`,
  and re-run `./install_ngsolve_serial`
 
 You can re-run the `install_python` and `install_cmake` scripts at any time to update

@@ -61,7 +61,7 @@ export LD_LIBRARY_PATH=$COMMON/lib:$LD_LIBRARY_PATH
 if [ $CLUSTER == "GAIA" ]; then
 	export LD_LIBRARY_PATH=/vol/apps/compilers/intel/2018/compilers_and_libraries_2018.1.163/linux/mkl/lib/intel64:$LD_LIBRARY_PATH
 else
- 	LD_LIBRARY_PATH=/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH
+ 	export LD_LIBRARY_PATH=/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH
 fi
 
 export PYTHONPATH=$HOME/local:$PYTHONPATH
@@ -76,7 +76,7 @@ Source these changes by `source ~/.bashrc`
 Run `install_cmake3 3.1.3` to install cmake3 in a 'common' directory 
 in your $HOME folder (see the tree above).
 
-Note: cmake 3.1.3 is not the latest version, but we need to install it first because the current version of cmake won't boostrap from the very old CMake on the Coeus or Gaia.
+Note: cmake 3.1.3 is not a recent version, but we need to install it first because recent versions of cmake won't boostrap from the very old CMake on the Coeus or Gaia.
 
 Now if you do `which cmake`, you should see
 `~/common/install/bin/cmake`
@@ -85,11 +85,10 @@ and if you do cmake --version, you should see
 cmake version 3.1.3
 
 Now you're ready to install a higher CMake version by running the install script again.
-Cmake 3.18.1 gave an error that gcc-9.2.0 doesn't support enough C++ 11.
 
 On Coeus, you should be able to do:
 
-`./install_cmake3 3.17.5`
+`./install_cmake3 3.18.1`
 
 On Gaia, because the openssl is so old (version 1.0.1e), the highest you can go is:
 
@@ -162,11 +161,12 @@ Then open a python or ipython console and try
 
 ### Step 9
 
-Make sure the `module load` commands above are present in your slurm batch script
+Make sure the `module load` commands above are present in your slurm batch script.  Adding these to your script means that no matter what your local environment settings are when your scheduled job is started, the job's environmment will be correct.
+
 Sample 'slurm_coeus' and 'slurm_gaia' scripts are provided here.  Create a working directory and copy one of these into it and edit as needed.  Then submit your job like this:
 `sbatch slurm_gaia`
 
-Search the web for more slurm commands.
+Search the web for more slurm commands.  There aren't too many...
 
 ### Updating
 
@@ -179,7 +179,7 @@ versions of these.
 
 ### Optional items
 
-If you need NGSolve special functions, 
+If you need NGSolve special functions, such as Bessel functions (fiberamp does), 
 you can install that package using the provided scripts.
 
 If you need to use NGSolve's capabilities for splitting the mesh among

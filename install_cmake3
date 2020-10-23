@@ -7,7 +7,6 @@
 # has been modified to include $HOME/common/bin in your path. 
 # You can check your version using $ cmake --version
 # Then run this script again to install your preferred version of Cmake3.
-# Cmake 3.18.1 gave an error with gcc-9.2.0 that it doesn't support enough C++ 11 but 3.17.1 compiled correctly with gcc-9.2.0.  That gcc is currently the most recent on the Coeus or Gaia
 
 if [ "$1" = "" ]; then
     echo "Please specify the desired version, e.g. 3.13.2"

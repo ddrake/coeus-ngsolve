@@ -40,17 +40,18 @@ directories in your home directory something like this:
  * Install the [Cisco VPN client](https://www.pdx.edu/technology/vpn) on your local machine. 
  * Create accounts at Github and Bitbucket (if you don't already have them), generate SSH keys for your local machine(s) and copy/paste the contents of the public key file `id_rsa.pub` to your Github account.
   There are good instructions for this [here](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh).
+(I'd recommend either no passphrase or a short one that you can remember).
 Add the public key to your Bitbucket account as well.
  * Once you have been granted access to the cluster,
-Follow the (Getting Started)[https://sites.google.com/pdx.edu/research-computing/getting-started/coeus-hpc-cluster] steps.
+Follow the [Getting Started](https://sites.google.com/pdx.edu/research-computing/getting-started/coeus-hpc-cluster) steps.
 
 ### Step 1
 
 On your local machine, copy the contents of `~/.ssh/id_rsa.pub`, your SSH public key, to your clipboard.
  Then on the cluster node, do `nano ~/.ssh/authorized_keys`, and paste this key text at the bottom of the file.
-This will allow you to use ssh and sftp without having to enter a password each time.
+This will allow you to access the cluster via ssh and sftp without having to enter a password each time.
 
-Also, while you're at it, locate the public key file on the cluster: `~/.ssh/id_rsa_pub` and copy/paste its contents to your GitHub and Bitbucket accounts so you can work with your repositories on the cluster without having to enter passwords.
+Also, while you're at it, locate the public key file on the cluster: `~/.ssh/id_rsa_pub` and copy/paste its contents to your GitHub and Bitbucket accounts so you can work with your repositories from the cluster without having to enter passwords.
 
 ### Step 2
 
@@ -65,13 +66,6 @@ don't know any of these editors, use `nano ~/.bashrc`.
 export COMMON=~/common/install
 
 export PATH=$COMMON/bin:$PATH
-
-export LD_LIBRARY_PATH=$COMMON/lib:$LD_LIBRARY_PATH
-if [ $CLUSTER == "GAIA" ]; then
-	export LD_LIBRARY_PATH=/vol/apps/compilers/intel/2018/compilers_and_libraries_2018.1.163/linux/mkl/lib/intel64:$LD_LIBRARY_PATH
-else
- 	export LD_LIBRARY_PATH=/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH
-fi
 
 export PYTHONPATH=$HOME/local:$PYTHONPATH
 
@@ -140,7 +134,11 @@ git clone https://bitbucket.org/jayggg/pyeigfeast.git
 
 ### Step 7
 
-Add private modules, depending on which cluster you are on:
+Modules are an easy way for ensuring that environment variables such as `$PATH` and `$LD_LIBRARY_PATH` are set correctly for the process you want to perform.  Usually you will want to have the modules `gcc-9.2.0`, and `intel` (for coeus) or `intel-18.0`  (for gaia) loaded before you start running a job.
+So-called 'private modules' are just a way of extending this functionality for software (such as the latest NGSolve) that is not installed on the Coeus.
+For more info on modules see [here](http://wiki.c2b2.columbia.edu/arcs/index.php/Cluster_Modules)
+
+Add private modules for NGSolve, depending on which cluster you are on:
 
 ```
 cp -r $HOME/coeus_ngsolve/privatemodules_coeus $HOME/privatemodules
@@ -151,9 +149,9 @@ or
 cp -r $HOME/coeus_ngsolve/privatemodules_gaia $HOME/privatemodules
 ```
 
-Check the last line of each of the module files to ensure that the Python minor version (e.g. 3.8) associated with NGSolve matches the version you installed in Step 4.
+It's a good idea to check the last line of each of the module files to ensure that the Python minor version (e.g. 3.8) associated with NGSolve matches the version you installed in Step 4.
  
-The modules `ngsolve/serial`, `ngsolve/parallel` and `ngsolve/phi_serial` should now appear if you type `module avail`
+The modules `ngsolve/serial`, `ngsolve/parallel` and `ngsolve/phi_serial` should now appear if you type `module avail`.
 
 ### Step 8
 
@@ -164,18 +162,19 @@ run `install_ngsolve_serial` to install Netgen/Ngsolve for most purposes.
 To test the install, first do
 `module load ngsolve/serial`
 `module load gcc-9.2.0`
+`module load intel` or `module load intel-18.0` on gaia
 
 Then open a python or ipython console and try
 `import ngsolve`
 
 ### Step 9
 
-Make sure the `module load` commands above are present in your slurm batch script.  Adding these to your script means that no matter what your local environment settings are when your scheduled job is started, the job's environmment will be correct.
+Make sure the `module load` commands above are present in your slurm batch script.  Having these in your script means that no matter what your local environment settings are when your scheduled job is started, the job's environmment will be correct.
 
 Sample 'slurm_coeus' and 'slurm_gaia' scripts are provided here.  Create a working directory and copy one of these into it and edit as needed.  Then submit your job like this:
 `sbatch slurm_gaia`
 
-Search the web for more slurm commands.  There aren't too many...
+It's a good idea to read the short [Slurm documentation](https://slurm.schedmd.com/documentation.html)
 
 ### Updating
 

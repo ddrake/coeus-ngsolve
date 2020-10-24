@@ -36,11 +36,11 @@ directories in your home directory something like this:
 
 ```
 ### Step 0
-
- * Install the (Cisco VPN client)[https://www.pdx.edu/technology/vpn] on your local machine. 
+ * Fill out the [form](https://portlandstate.atlassian.net/servicedesk/customer/portal/2/create/148?src=-899265461) to request access to the clusters.  You should get an email with instructions within a few days.
+ * Install the [Cisco VPN client](https://www.pdx.edu/technology/vpn) on your local machine. 
  * Create accounts at Github and Bitbucket (if you don't already have them), generate SSH keys for your local machine(s) and copy/paste the contents of the public key file `id_rsa.pub` to your Github account.
-  There are good instructions for this here: [https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh].
-Do the same for Bitbucket.
+  There are good instructions for this [here](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh).
+Add the public key to your Bitbucket account as well.
  * Once you have been granted access to the cluster,
 Follow the (Getting Started)[https://sites.google.com/pdx.edu/research-computing/getting-started/coeus-hpc-cluster] steps.
 

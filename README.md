@@ -35,6 +35,14 @@ directories in your home directory something like this:
     └── my_python_project
 
 ```
+### Step 0
+
+ * Install the (Cisco VPN client)[https://www.pdx.edu/technology/vpn] on your local machine. 
+ * Create accounts at Github and Bitbucket (if you don't already have them), generate SSH keys for your local machine(s) and copy/paste the contents of the public key file `id_rsa.pub` to your Github account.
+  There are good instructions for this here: [https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh].
+Do the same for Bitbucket.
+ * Once you have been granted access to the cluster,
+Follow the (Getting Started)[https://sites.google.com/pdx.edu/research-computing/getting-started/coeus-hpc-cluster] steps.
 
 ### Step 1
 

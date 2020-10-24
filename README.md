@@ -38,14 +38,15 @@ directories in your home directory something like this:
 
 ### Step 1
 
-Edit the file on the cluster: `~/.ssh/authorized_keys`, adding the SSH key for your local machine.
+On your local machine, copy the contents of `~/.ssh/id_rsa.pub`, your SSH public key, to your clipboard.
+ Then on the cluster node, do `nano ~/.ssh/authorized_keys`, and paste this key text at the bottom of the file.
 This will allow you to use ssh and sftp without having to enter a password each time.
 
-Also, while you're at it, locate the public key file on the cluster: `~/.ssh/id_rsa_pub` and paste its contents to your GitHub and Bitbucket accounts so you can work with your repositories on the cluster without having to enter passwords.
+Also, while you're at it, locate the public key file on the cluster: `~/.ssh/id_rsa_pub` and copy/paste its contents to your GitHub and Bitbucket accounts so you can work with your repositories on the cluster without having to enter passwords.
 
 ### Step 2
 
-Edit the file `~/.bashrc` using nano, vim or emacs, pasting in the following lines.  If you
+Edit the file `~/.bashrc` on the cluster node using nano, vim or emacs, pasting in the following lines.  If you
 don't know any of these editors, use `nano ~/.bashrc`.
   Uncomment the line for the cluster you are setting up.  The `$CLUSTER` variable is used by several scripts.
 

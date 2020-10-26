@@ -58,7 +58,9 @@ your repositories from the cluster without having to enter passwords.
 
 ### Step 3
 
-Clone this repository to your home directory on the login node `cd ~ && git clone git@github.com:ddrake/coeus-ngsolve.git`
+Clone this repository to your home directory on the login node.
+
+`cd ~ && git clone git@github.com:ddrake/coeus-ngsolve.git`
 
 ### Step 4
 
@@ -195,11 +197,11 @@ It's a good idea to read the (short) [Slurm documentation](https://slurm.schedmd
 
 ### Updating
 
-To update NGSolve, simply delete the NGserial directory tree using `rm -rf NGserial`,
- and re-run `./install_ngsolve_serial`
+To update NGSolve, simply re-run `./install_ngsolve_serial`.  The `NGserial` directory will be deleted and recreated.
+If you're using ngs_special_functions, you'll need to re-install it.
 
 You can re-run the `install_python` and `install_cmake` scripts at any time to update
-those pre-requisites to any desired version.  It's not necessary to delete the previous
+those pre-requisites to any desired version.  It's not necessary to delete previous
 versions of these.
 
 ### Optional items
@@ -208,7 +210,8 @@ If you need NGSolve special functions, such as Bessel functions (fiberamp does),
 you can install that package using the provided scripts.
 
 If you need to use NGSolve's capabilities for splitting the mesh among
- multiple MPI processes, run `./install_ngsolve_parallel`.  This will create a directory NGparallel.  You can use  `module load ngsolve/parallel` to set paths in your scripts. 
+ multiple MPI processes, run `./install_ngsolve_parallel`.  This will create a directory `~/NGparallel`.
+ You can use  `module load ngsolve/parallel` to set the environment for your scripts. 
 
 Private modules make it easy to switch between the serial and parallel NGSolve
  installations or schedule jobs simultaneously in each context.

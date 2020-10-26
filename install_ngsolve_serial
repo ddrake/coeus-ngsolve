@@ -14,38 +14,35 @@ export BASEDIR=$HOME/NGserial
 export BUILDDIR=$BASEDIR/build
 export SRCDIR=$BASEDIR/ngsolve
 
-if [ ! -d $SRCDIR ]; then
-    mkdir -p $BASEDIR 
-    cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve
+if [ -d $BASEDIR ]; then
+    rm -rf $BASEDIR
 fi
+
+mkdir $BASEDIR
+cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve
 
 cd $SRCDIR
 git submodule update --init --recursive
-
-cd $BASEDIR
-if [ -d $BUILDDIR ]; then
-   rm -rf $BUILDDIR
-fi
 
 mkdir -p $BUILDDIR 
 cd $BUILDDIR
 
 if [ $CLUSTER == "GAIA" ]; then
-cmake \
-  -DCMAKE_INSTALL_PREFIX=$BASEDIR \
-  -DMKL_ROOT=/vol/apps/compilers/intel/2018/compilers_and_libraries_2018.1.163/linux/mkl \
-  -DUSE_MKL=ON \
-  -DUSE_UMFPACK=ON \
-  -DCMAKE_BUILD_TYPE=Release \
-  $BASEDIR/ngsolve
+    cmake \
+      -DCMAKE_INSTALL_PREFIX=$BASEDIR \
+      -DMKL_ROOT=/vol/apps/compilers/intel/2018/compilers_and_libraries_2018.1.163/linux/mkl \
+      -DUSE_MKL=ON \
+      -DUSE_UMFPACK=ON \
+      -DCMAKE_BUILD_TYPE=Release \
+      $BASEDIR/ngsolve
 else
-cmake \
-  -DCMAKE_INSTALL_PREFIX=$BASEDIR \
-  -DMKL_ROOT=/opt/intel/mkl \
-  -DUSE_MKL=ON \
-  -DUSE_UMFPACK=ON \
-  -DCMAKE_BUILD_TYPE=Release \
-  $BASEDIR/ngsolve
+    cmake \
+      -DCMAKE_INSTALL_PREFIX=$BASEDIR \
+      -DMKL_ROOT=/opt/intel/mkl \
+      -DUSE_MKL=ON \
+      -DUSE_UMFPACK=ON \
+      -DCMAKE_BUILD_TYPE=Release \
+      $BASEDIR/ngsolve
 fi
 
 # TODO: Get Pardiso working (at least on Coeus) and make sure MKL is working

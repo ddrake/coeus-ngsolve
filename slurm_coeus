@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # Slurm Example for Coeus 
 # Note: The pound signs in front of the SBATCH commands are necessary.
 # To comment out an SBATCH command use an extra #.

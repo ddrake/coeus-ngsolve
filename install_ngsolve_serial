@@ -1,10 +1,14 @@
-#!/bin/env bash
+#!/bin/bash
 
 # This script installs Netgen/Ngsolve for serial processing
 # assuming that Python3 and Cmake3 are already installed
 
 module load gcc-9.2.0
-module load intel-18.0
+if [ $CLUSTER == "GAIA" ]; then
+    module load intel-18.0
+else
+    module load intel
+fi
 
 export BASEDIR=$HOME/NGserial
 export BUILDDIR=$BASEDIR/build
@@ -17,9 +21,12 @@ fi
 
 cd $SRCDIR
 git submodule update --init --recursive
+
+cd $BASEDIR
 if [ -d $BUILDDIR ]; then
    rm -rf $BUILDDIR
 fi
+
 mkdir -p $BUILDDIR 
 cd $BUILDDIR
 
@@ -28,7 +35,7 @@ cmake \
   -DCMAKE_INSTALL_PREFIX=$BASEDIR \
   -DMKL_ROOT=/vol/apps/compilers/intel/2018/compilers_and_libraries_2018.1.163/linux/mkl \
   -DUSE_MKL=ON \
-  -DUSE_UMFPACK=ON \  # still can't find pardiso on Gaia
+  -DUSE_UMFPACK=ON \
   -DCMAKE_BUILD_TYPE=Release \
   $BASEDIR/ngsolve
 else
@@ -36,12 +43,16 @@ cmake \
   -DCMAKE_INSTALL_PREFIX=$BASEDIR \
   -DMKL_ROOT=/opt/intel/mkl \
   -DUSE_MKL=ON \
-  -DUSE_PARDISO=ON \
   -DUSE_UMFPACK=ON \
   -DCMAKE_BUILD_TYPE=Release \
   $BASEDIR/ngsolve
 fi
-# Note: seg faults are possible with both MKL and UMFPACK on
+
+# TODO: Get Pardiso working (at least on Coeus) and make sure MKL is working
+# -DUSE_PARDISO=ON \
+# Couldn't find Pardiso on Gaia
+# Why is Pardiso not found on Coeus now?  CMake ignoring MKL_ROOT?
+# Note: seg faults are possible with both PARDISO and UMFPACK ON 
 
 make -j20
 make install

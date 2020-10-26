@@ -1,5 +1,5 @@
-#!/usr/bin/bash
-# Slurm Example for Coeus 
+#!/bin/bash
+# Slurm Example for Gaia 
 # Note: The pound signs in front of the SBATCH commands are necessary.
 # To comment out an SBATCH command use an extra #.
 # Note: This assumes you have specified to use the serial installation 

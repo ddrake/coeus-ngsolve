@@ -9,7 +9,7 @@ proc ModulesHelp { } {
 
         puts stderr "\tThis module sets the environment for"
         puts stderr "\tthe standard parallel compile of NGSolve"
-	    puts stderr "\tin $HOME/NGParallel."
+	    puts stderr "\tin ~/NGParallel."
         puts stderr "\n\tVersion $version\n"
 }
 
@@ -17,7 +17,7 @@ module-whatis	"This module sets the environment for parallel NGSolve"
 
 # for Tcl script use only
 set     version      "3.2.10"
-set     topdir       /home/ddrake/NGparallel
+set     topdir       ~/NGparallel
 
 setenv          NETGENDIR       $topdir/bin
 prepend-path    PATH            $topdir/bin

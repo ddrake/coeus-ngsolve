@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/bash
 if [ "$1" = "" ]; then
     echo "Please specify the desired version, e.g. 3.6.8"
     exit 1

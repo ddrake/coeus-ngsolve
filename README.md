@@ -56,13 +56,13 @@ Also, while you're at it, locate the public key file on the cluster: `~/.ssh/id_
 and copy/paste its contents to your GitHub and Bitbucket accounts so you can work with
 your repositories from the cluster without having to enter passwords.
 
-### Step 3
+### Step 2
 
 Clone this repository to your home directory on the login node.
 
 `cd ~ && git clone git@github.com:ddrake/coeus-ngsolve.git`
 
-### Step 4
+### Step 3
 
 Modules are an easy way for ensuring that environment variables such as `$PATH` and `$LD_LIBRARY_PATH` are set correctly
 for the process you want to perform.  Usually you will want to have the modules `gcc-9.2.0`, and `intel` (for coeus)
@@ -88,7 +88,7 @@ It's a good idea to check the last line of each of the module files to ensure th
 The modules `ngsolve/serial`, `ngsolve/parallel` and `ngsolve/phi_serial` should now appear if you type `module avail`.
 
 
-### Step 5
+### Step 4
 
 Edit the file `~/.bashrc` on the cluster node using nano, vim or emacs, pasting in the following lines.  If you
 don't know any of these editors, use `nano ~/.bashrc`.
@@ -111,7 +111,7 @@ module use --append $HOME/privatemodules
 
 Source these changes by `source ~/.bashrc`
 
-### Step 6
+### Step 5
 
 Run `install_cmake3 3.1.3` to install cmake3 in a 'common' directory 
 in your `$HOME` folder (see the tree above).
@@ -135,7 +135,7 @@ You may not be able to get a higher version like 3.16 or 3.17 because the openss
 CMake versions available for download are listed here: 
 [https://cmake.org/download/]
 
-### Step 4
+### Step 6
 
 Install Python3
 
@@ -150,14 +150,14 @@ On Gaia, because of the *really* old openssl, the highest you can go is:
 Python versions for download are listed here:
 [https://www.python.org/downloads/].
 
-### Step 5 
+### Step 7 
 
 ```
 pip3 install --upgrade pip
 pip3 install ipython numpy scipy sympy matplotlib pytest cxroots
 ```
 
-### Step 6
+### Step 8
 
 Create a local directory where you will put Python projects so (if they have an `__init__.py` file), they will
 be in the `PYTHON_PATH` with our `.bashrc` setup
@@ -168,7 +168,7 @@ cd ~/local
 git clone https://bitbucket.org/jayggg/pyeigfeast.git
 ```
 
-### Step 8
+### Step 9
 
 Open `install_ngsolve_serial` in an editor to make sure the cmake command is to your liking.
 The Pardiso sparse solver is recommended, but does not appear to be available on Gaia.  On Gaia, UMFPack should be enabled instead.
@@ -183,7 +183,7 @@ To test the install, first do
 Then open a python or ipython console and try
 `import ngsolve`
 
-### Step 9
+### Step 10
 
 Make sure the `module load` commands above are present in your slurm batch script.
 Having these in your script means that no matter what your local environment settings are

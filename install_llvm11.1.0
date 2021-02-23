@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# This script installs LLVM 11.1.0 with the clang/clang++ compiler
+# assuming that Python3 and Cmake3 are already installed
+
+export BASEDIR=$HOME/local/llvm-project
+export BUILDDIR=$BASEDIR/build
+export INSTALLDIR=$BASEDIR/install
+export SRCDIR=$BASEDIR/llvm
+
+if [ -d $BASEDIR ]; then
+    rm -rf $BASEDIR
+fi
+
+cd $HOME/local
+wget https://github.com/llvm/llvm-project/archive/llvmorg-11.1.0.tar.gz 
+tar xvf llvmorg-11.1.0.tar.gz
+rm llvmorg-11.1.0.tar.gz
+mv llvm-project-11.1.0 llvm-project
+
+mkdir $BUILDDIR
+mkdir $INSTALLDIR
+cd $BUILDDIR
+
+cmake $SRCDIR \
+    -DCMAKE_INSTALL_PREFIX=$INSTALLDIR \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DLLVM_TARGETS_TO_BUILD=all \
+    -DLLVM_INCLUDE_DOCS=OFF \
+    -DLLVM_INCLUDE_TESTS=OFF \
+    -DLLVM_ENABLE_Z3_SOLVER=OFF \
+    -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lld;lldb;openmp;polly;mlir" \
+    -DLLVM_ENABLE_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind" \
+    -DLLDB_ENABLE_PYTHON=OFF \
+    -DLLDB_ENABLE_LUA=OFF \
+    -DLLDB_ENABLE_LZMA=OFF \
+    -DLIBOMP_INSTALL_ALIASES=OFF 
+
+make -j20
+make install
+

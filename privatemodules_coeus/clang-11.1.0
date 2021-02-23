@@ -1,0 +1,22 @@
+#%Module1.0#####################################################################
+##
+## clang 11.1.0 modulefile
+##
+## clang-11.1.0
+##
+proc ModulesHelp { } {
+        global version
+
+        puts stderr "\tThis module sets the environment for"
+        puts stderr "\tthe clang/clang++ compiler."
+        puts stderr "\n\tVersion $version\n"
+}
+
+module-whatis	"This module sets the environment for the clang/clang++ compiler"
+
+# for Tcl script use only
+set     version      "3.2.10"
+set     topdir       ~/local/llvm-project/llvm
+
+prepend-path    PATH            $topdir/bin
+

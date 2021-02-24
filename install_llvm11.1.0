@@ -4,7 +4,7 @@
 # assuming that Python3 and Cmake3 are already installed
 # The build works on Coeus, but currently fails on Gaia
 
-# Note that if NGSolve is compiled using clang, all related code, 
+# Note that if NGSolve is compiled using clang, all related code,
 # e.g. ngs-special-functions, fiberamp, ngstents, etc... should
 # also be compiled using clang.  If not, you will likely see compile
 # errors like "unrecognized command line option '-faligned-allocation';
@@ -24,7 +24,7 @@ if [ -d $BASEDIR ]; then
 fi
 
 cd $HOME/local
-wget https://github.com/llvm/llvm-project/archive/llvmorg-11.1.0.tar.gz 
+wget https://github.com/llvm/llvm-project/archive/llvmorg-11.1.0.tar.gz
 tar xvf llvmorg-11.1.0.tar.gz
 rm llvmorg-11.1.0.tar.gz
 mv llvm-project-llvmorg-11.1.0 llvm-project
@@ -42,7 +42,6 @@ cmake $SRCDIR \
     -DLLVM_ENABLE_RTTI:BOOL=ON \
     -DLLVM_LINK_LLVM_DYLIB:BOOL=ON \
     -DLLVM_BUILD_LLVM_DYLIB:BOOL=ON \
-    -DLLVM_ENABLE_RTTI:BOOL=ON \
     -DLLVM_ENABLE_PROJECTS:STRING="clang;clang-tools-extra;lld;lldb;openmp;polly;mlir" \
     -DLLVM_ENABLE_RUNTIMES:STRING="compiler-rt;libcxx;libcxxabi;libunwind" \
     -DLLDB_ENABLE_PYTHON:BOOL=OFF \
@@ -53,5 +52,43 @@ cmake $SRCDIR \
 make -j20
 make install
 
-# maybe try this:
-# make CXXFLAGS="-frtti -std=c++17" -j20
+#    NOTES on CMake settings based on
+#    http://www.linuxfromscratch.org/blfs/view/svn/general/llvm.html
+
+#    -DCMAKE_BUILD_TYPE:STRING=Release
+#    enables compiler optimizations in order to speed up the code and reduces
+#    its size. It also disables some compile checks which are not necessary
+#    on a production system.
+
+#    -DLLVM_TARGETS_TO_BUILD:STRING="host"
+#    We don't need to cross-compile, just target the host.
+
+#    -DLLVM_BUILD_LLVM_DYLIB:BOOL=ON
+#    build libraries as static and link them into a unique shared one.
+#    this is the recommended way of building a shared library.
+
+#    -DLLVM_LINK_LLVM_DYLIB:BOOL=ON
+#    Link tools against a the shared library instead of the static ones
+#    This slightly reduces their size and ensures that llvm-config will
+#    correctly use libLLVM-11.1.so
+
+#    -DLLVM_INCLUDE_DOCS:BOOL=OFF
+#    -DLLVM_INCLUDE_TESTS:BOOL=OFF
+#    Speed up compilation and reduce size
+
+#    -DLLVM_ENABLE_RTTI:BOOL=ON
+#    build LLVM with run-time type information.
+
+#    -DLLVM_ENABLE_PROJECTS:STRING="clang;clang-tools-extra;lld;lldb;openmp;polly;mlir"
+#    Projects enabled in homebrew recipe
+
+#    -DLLVM_ENABLE_RUNTIMES:STRING="compiler-rt;libcxx;libcxxabi;libunwind" \
+#    Runtimes enabled in homebrew recipe
+
+#    -DLLDB_ENABLE_PYTHON:BOOL=OFF \
+#    -DLLDB_ENABLE_LUA:BOOL=OFF \
+#    -DLLDB_ENABLE_LZMA:BOOL=OFF \
+#    Don't make the debugger support these (homebrew recipe)
+
+#    -DLIBOMP_INSTALL_ALIASES:BOOL=OFF
+#    Turned off in homebrew recipe

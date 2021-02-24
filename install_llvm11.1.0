@@ -26,17 +26,23 @@ cd $BUILDDIR
 cmake $SRCDIR \
     -DCMAKE_INSTALL_PREFIX=$INSTALLDIR \
     -DCMAKE_BUILD_TYPE=Release \
-    -DLLVM_TARGETS_TO_BUILD=all \
+    -DLLVM_TARGETS_TO_BUILD="host" \
     -DLLVM_INCLUDE_DOCS=OFF \
     -DLLVM_INCLUDE_TESTS=OFF \
     -DLLVM_ENABLE_Z3_SOLVER=OFF \
+    -DLLVM_ENABLE_RTTI=ON \
+    -DLLVM_LINK_LLVM_DYLIB=ON \
+    -DLLVM_BUILD_LLVM_DYLIB=ON \
+    -DLLVM_ENABLE_RTTI=ON \
     -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lld;lldb;openmp;polly;mlir" \
     -DLLVM_ENABLE_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind" \
     -DLLDB_ENABLE_PYTHON=OFF \
     -DLLDB_ENABLE_LUA=OFF \
     -DLLDB_ENABLE_LZMA=OFF \
-    -DLIBOMP_INSTALL_ALIASES=OFF 
+    -DLIBOMP_INSTALL_ALIASES=OFF
 
-# make -j20
-# make install
+make -j20
+make install
 
+# maybe try this:
+# make CXXFLAGS="-frtti -std=c++17" -j20

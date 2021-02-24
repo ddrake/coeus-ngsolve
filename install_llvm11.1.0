@@ -2,6 +2,15 @@
 
 # This script installs LLVM 11.1.0 with the clang/clang++ compiler
 # assuming that Python3 and Cmake3 are already installed
+# The build works on Coeus, but currently fails on Gaia
+
+# Note that if NGSolve is compiled using clang, all related code, 
+# e.g. ngs-special-functions, fiberamp, ngstents, etc... should
+# also be compiled using clang.  If not, you will likely see compile
+# errors like "unrecognized command line option '-faligned-allocation';
+#   did you mean -fsized-deallocation'?"
+# These errors occur if project uses the cmake function
+# "add_ngsolve_python_module" which is provided by NGSolve.
 
 module load gcc-9.2.0
 
@@ -24,22 +33,22 @@ mkdir $INSTALLDIR
 cd $BUILDDIR
 
 cmake $SRCDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLDIR \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DLLVM_TARGETS_TO_BUILD="host" \
-    -DLLVM_INCLUDE_DOCS=OFF \
-    -DLLVM_INCLUDE_TESTS=OFF \
-    -DLLVM_ENABLE_Z3_SOLVER=OFF \
-    -DLLVM_ENABLE_RTTI=ON \
-    -DLLVM_LINK_LLVM_DYLIB=ON \
-    -DLLVM_BUILD_LLVM_DYLIB=ON \
-    -DLLVM_ENABLE_RTTI=ON \
-    -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lld;lldb;openmp;polly;mlir" \
-    -DLLVM_ENABLE_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind" \
-    -DLLDB_ENABLE_PYTHON=OFF \
-    -DLLDB_ENABLE_LUA=OFF \
-    -DLLDB_ENABLE_LZMA=OFF \
-    -DLIBOMP_INSTALL_ALIASES=OFF
+    -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLDIR \
+    -DCMAKE_BUILD_TYPE:STRING=Release \
+    -DLLVM_TARGETS_TO_BUILD:STRING="host" \
+    -DLLVM_INCLUDE_DOCS:BOOL=OFF \
+    -DLLVM_INCLUDE_TESTS:BOOL=OFF \
+    -DLLVM_ENABLE_Z3_SOLVER:BOOL=OFF \
+    -DLLVM_ENABLE_RTTI:BOOL=ON \
+    -DLLVM_LINK_LLVM_DYLIB:BOOL=ON \
+    -DLLVM_BUILD_LLVM_DYLIB:BOOL=ON \
+    -DLLVM_ENABLE_RTTI:BOOL=ON \
+    -DLLVM_ENABLE_PROJECTS:STRING="clang;clang-tools-extra;lld;lldb;openmp;polly;mlir" \
+    -DLLVM_ENABLE_RUNTIMES:STRING="compiler-rt;libcxx;libcxxabi;libunwind" \
+    -DLLDB_ENABLE_PYTHON:BOOL=OFF \
+    -DLLDB_ENABLE_LUA:BOOL=OFF \
+    -DLLDB_ENABLE_LZMA:BOOL=OFF \
+    -DLIBOMP_INSTALL_ALIASES:BOOL=OFF
 
 make -j20
 make install

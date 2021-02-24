@@ -16,7 +16,7 @@ module-whatis	"This module sets the environment for the clang/clang++ compiler"
 
 # for Tcl script use only
 set     version      "3.2.10"
-set     topdir       ~/local/llvm-project/llvm
+set     topdir       ~/local/llvm-project/install
 
 prepend-path    PATH            $topdir/bin
 

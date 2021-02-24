@@ -17,11 +17,11 @@ git submodule update --init --recursive
 mkdir $BASEDIR/build 
 cd $BASEDIR/build
 cmake \
-  -DCMAKE_INSTALL_PREFIX=$BASEDIR \
-  -DUSE_MKL=ON \
-  -DMKL_ROOT=/opt/intel/mkl \
-  -DUSE_GUI=OFF \
-  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX:PATH=$BASEDIR \
+  -DUSE_MKL:BOOL=ON \
+  -DMKL_ROOT:PATH=/opt/intel/mkl \
+  -DUSE_GUI:BOOL=OFF \
+  -DCMAKE_BUILD_TYPE:STRING=Release \
   $BASEDIR/ngsolve
 
 make -j20

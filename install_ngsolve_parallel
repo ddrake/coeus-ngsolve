@@ -19,26 +19,26 @@ cd $BASEDIR
 mkdir $BASEDIR/build 
 cd $BASEDIR/build
 cmake \
-  -DCMAKE_INSTALL_PREFIX=$BASEDIR \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DUSE_MPI=ON \
-  -DUSE_GUI=OFF \
-  -DUSE_MUMPS=ON \
-  -DUSE_HYPRE=ON \
-  -DUSE_MKL=ON \
-  -DMKL_ROOT=/opt/intel/mkl \
-  -DMKL_SDL=OFF \
+  -DCMAKE_INSTALL_PREFIX:PATH=$BASEDIR \
+  -DCMAKE_BUILD_TYPE:STRING=Release \
+  -DUSE_MPI:BOOL=ON \
+  -DUSE_GUI:BOOL=OFF \
+  -DUSE_MUMPS:BOOL=ON \
+  -DUSE_HYPRE:BOOL=ON \
+  -DUSE_MKL:BOOL=ON \
+  -DMKL_ROOT:PATH=/opt/intel/mkl \
+  -DMKL_SDL:BOOL=OFF \
   $BASEDIR/ngsolve
 make -j20
 make install
 
 # The first time installing, it's necessary to edit the file ngspy,
 # appending :/usr/lib64/libgomp.so.1 to the PRELOAD PATH
-cd $BASEDIR/bin
+# cd $BASEDIR/bin
 
 # After editing, the file ngspy should look like this, but with your
 # username in the place of <username>
-cat ngspy
+# cat ngspy
 # #! /usr/bin/bash
 # LD_PRELOAD=$LD_PRELOAD:/act/openmpi-2.0/gcc-8.2.0/lib/libmpi.so:/opt/intel/mkl/lib/intel64/libmkl_core.so:/opt/intel/mkl/lib/intel64/libmkl_gnu_thread.so:/opt/intel/mkl/lib/intel64/libmkl_intel_lp64.so:/opt/intel/mkl/lib/intel64/libmkl_blacs_openmpi_lp64.so:/usr/lib64/libgomp.so.1 /home/<username>/common/install/bin/python3 $*
 

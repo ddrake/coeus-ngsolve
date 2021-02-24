@@ -8,7 +8,8 @@
 # You can check your version using $ cmake --version
 # Then run this script again to install your preferred version of Cmake3.
 
-if [ "$1" = "" ]; then
+if [[ "$1" = "" ]]
+then
     echo "Please specify the desired version, e.g. 3.13.2"
     exit 1
 fi

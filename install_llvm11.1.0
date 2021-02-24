@@ -19,7 +19,8 @@ export BUILDDIR=$BASEDIR/build
 export INSTALLDIR=$BASEDIR/install
 export SRCDIR=$BASEDIR/llvm
 
-if [ -d $BASEDIR ]; then
+if [[ -d $BASEDIR ]]
+then
     rm -rf $BASEDIR
 fi
 

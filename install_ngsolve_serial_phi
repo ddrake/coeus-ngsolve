@@ -27,6 +27,3 @@ cmake \
 make -j20
 make install
 
- Test that everything works
- $ cd $BASEDIR/ngsolve/py_tutorials
- $ netgen poisson.py

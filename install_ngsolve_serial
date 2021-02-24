@@ -3,18 +3,27 @@
 # This script installs Netgen/Ngsolve for serial processing
 # assuming that Python3 and Cmake3 are already installed
 
-module load gcc-9.2.0
-if [ $CLUSTER == "GAIA" ]; then
+
+if [[ $CLUSTER == "GAIA" ]]
+then
     module load intel-18.0
+    module load gcc-9.2.0
 else
     module load intel
+    if [[ -n $USECLANG ]]
+    then
+        module load clang-11.1.0
+    else
+        module load gcc-9.2.0
+    fi
 fi
 
 export BASEDIR=$HOME/NGserial
 export BUILDDIR=$BASEDIR/build
 export SRCDIR=$BASEDIR/ngsolve
 
-if [ -d $BASEDIR ]; then
+if [[ -d $BASEDIR ]]
+then
     rm -rf $BASEDIR
 fi
 
@@ -27,7 +36,8 @@ git submodule update --init --recursive
 mkdir -p $BUILDDIR 
 cd $BUILDDIR
 
-if [ $CLUSTER == "GAIA" ]; then
+if [[ $CLUSTER == "GAIA" ]]
+then
     cmake \
       -DCMAKE_INSTALL_PREFIX=$BASEDIR \
       -DMKL_ROOT=/vol/apps/compilers/intel/2018/compilers_and_libraries_2018.1.163/linux/mkl \
@@ -36,13 +46,26 @@ if [ $CLUSTER == "GAIA" ]; then
       -DCMAKE_BUILD_TYPE=Release \
       $BASEDIR/ngsolve
 else
-    cmake \
-      -DCMAKE_INSTALL_PREFIX=$BASEDIR \
-      -DMKL_ROOT=/opt/intel/mkl \
-      -DUSE_MKL=ON \
-      -DUSE_UMFPACK=ON \
-      -DCMAKE_BUILD_TYPE=Release \
-      $BASEDIR/ngsolve
+    if [[ -n $USECLANG ]]
+    then
+        cmake \
+          -DCMAKE_INSTALL_PREFIX=$BASEDIR \
+          -DMKL_ROOT=/opt/intel/mkl \
+          -DUSE_MKL=ON \
+          -DUSE_UMFPACK=ON \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_C_COMPILER:FILEPATH=$(which clang) \
+          -DCMAKE_CXX_COMPILER:FILEPATH=$(which clang++) \
+          $BASEDIR/ngsolve
+    else
+        cmake \
+          -DCMAKE_INSTALL_PREFIX=$BASEDIR \
+          -DMKL_ROOT=/opt/intel/mkl \
+          -DUSE_MKL=ON \
+          -DUSE_UMFPACK=ON \
+          -DCMAKE_BUILD_TYPE=Release \
+          $BASEDIR/ngsolve
+    fi
 fi
 
 # TODO: Get Pardiso working (at least on Coeus) and make sure MKL is working

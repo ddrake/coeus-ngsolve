@@ -98,7 +98,7 @@ don't know any of these editors, use `nano ~/.bashrc`.
 # export CLUSTER="GAIA"
 # export CLUSTER="COEUS"
 
-export COMMON=~/common/install
+export COMMON_INSTALL_DIR=~/common/install
 
 export PATH=$COMMON/bin:$PATH
 

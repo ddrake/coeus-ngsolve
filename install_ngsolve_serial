@@ -4,7 +4,7 @@
 # assuming that Python3 and Cmake3 are already installed
 
 
-if [[ $CLUSTER == "GAIA" ]]
+if [[ $CLUSTER = "GAIA" ]]
 then
     module load intel-18.0
     module load gcc-9.2.0
@@ -36,7 +36,7 @@ git submodule update --init --recursive
 mkdir -p $BUILDDIR 
 cd $BUILDDIR
 
-if [[ $CLUSTER == "GAIA" ]]
+if [[ $CLUSTER = "GAIA" ]]
 then
     cmake \
       -DCMAKE_INSTALL_PREFIX=$BASEDIR \
@@ -48,16 +48,20 @@ then
 else
     if [[ -n $USECLANG ]]
     then
+        # verbose option
+        # export CXXFLAGS="-v --gcc-toolchain=/vol/apps/gcc/gcc-9.2.0"
+        export CXXFLAGS="--gcc-toolchain=/vol/apps/gcc/gcc-9.2.0"
         cmake \
-          -DCMAKE_INSTALL_PREFIX=$BASEDIR \
-          -DMKL_ROOT=/opt/intel/mkl \
-          -DUSE_MKL=ON \
-          -DUSE_UMFPACK=ON \
-          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_INSTALL_PREFIX:PATH=$BASEDIR \
+          -DMKL_ROOT:PATH=/opt/intel/mkl \
+          -DUSE_MKL:BOOL=ON \
+          -DUSE_UMFPACK:BOOL=ON \
           -DCMAKE_C_COMPILER:FILEPATH=$(which clang) \
           -DCMAKE_CXX_COMPILER:FILEPATH=$(which clang++) \
           $BASEDIR/ngsolve
     else
+        # verbose option
+        # export CXXFLAGS="-v"
         cmake \
           -DCMAKE_INSTALL_PREFIX=$BASEDIR \
           -DMKL_ROOT=/opt/intel/mkl \

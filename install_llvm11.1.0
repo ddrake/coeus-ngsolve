@@ -2,15 +2,26 @@
 
 # This script installs LLVM 11.1.0 with the clang/clang++ compiler
 # assuming that Python3 and Cmake3 are already installed
-# The build works on Coeus, but currently fails on Gaia
+# The build succeeds on Coeus, but currently fails on Gaia
+# This script also succeeds on Ubuntu 20.04 with no issues so far.
 
-# Note that if NGSolve is compiled using clang, all related code,
+# NOTE that if NGSolve is compiled using clang, all related code,
 # e.g. ngs-special-functions, fiberamp, ngstents, etc... should
 # also be compiled using clang.  If not, you will likely see compile
 # errors like "unrecognized command line option '-faligned-allocation';
 #   did you mean -fsized-deallocation'?"
-# These errors occur if project uses the cmake function
+# These errors occur if the project uses the custom cmake function
 # "add_ngsolve_python_module" which is provided by NGSolve.
+
+# To build c++ 17 code with this compiler, we must specify a different
+# libstdc++.so.6 using the --gcc-toolchain compiler flag like this:
+# clang++ -o test -std=c++17 --gcc-toolchain=/vol/apps/gcc/gcc-9.2.0 test.cpp
+
+# PENDING ISSUES
+
+# clang++ fails to link the netgen binary, where the issue seems centered on 
+# the inability to locate definitions of c++11 constructs.
+# It cannot currently be used to build ngsolve.
 
 module load gcc-9.2.0
 
@@ -31,8 +42,8 @@ rm llvmorg-11.1.0.tar.gz
 mv llvm-project-llvmorg-11.1.0 llvm-project
 mkdir $BUILDDIR
 mkdir $INSTALLDIR
-cd $BUILDDIR
 
+cd $BUILDDIR
 cmake $SRCDIR \
     -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLDIR \
     -DCMAKE_BUILD_TYPE:STRING=Release \
@@ -53,8 +64,10 @@ cmake $SRCDIR \
 make -j20
 make install
 
-#    NOTES on CMake settings based on
+# -------------------------------------------------------------------
+#    NOTES on the above CMake settings based on
 #    http://www.linuxfromscratch.org/blfs/view/svn/general/llvm.html
+# -------------------------------------------------------------------
 
 #    -DCMAKE_BUILD_TYPE:STRING=Release
 #    enables compiler optimizations in order to speed up the code and reduces
@@ -62,7 +75,8 @@ make install
 #    on a production system.
 
 #    -DLLVM_TARGETS_TO_BUILD:STRING="host"
-#    We don't need to cross-compile, just target the host.
+#    We don't need to cross-compile, just target the host architecture.
+#    Not sure if there is a targe value appropriate to Xeon Phi nodes.
 
 #    -DLLVM_BUILD_LLVM_DYLIB:BOOL=ON
 #    build libraries as static and link them into a unique shared one.
@@ -89,7 +103,7 @@ make install
 #    -DLLDB_ENABLE_PYTHON:BOOL=OFF \
 #    -DLLDB_ENABLE_LUA:BOOL=OFF \
 #    -DLLDB_ENABLE_LZMA:BOOL=OFF \
-#    Don't make the debugger support these (homebrew recipe)
+#    Don't make the debugger support these (per homebrew recipe)
 
 #    -DLIBOMP_INSTALL_ALIASES:BOOL=OFF
 #    Turned off in homebrew recipe

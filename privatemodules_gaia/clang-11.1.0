@@ -18,5 +18,10 @@ module-whatis	"This module sets the environment for the clang/clang++ compiler"
 set     version      "3.2.10"
 set     topdir       ~/local/llvm-project/install
 
+## We need /vol/apps/gcc/gcc-9.2.0/lib64 in the LD_LIBRARY_PATH
+## because the GNU Standard C++ Library for the centos 6.10 system
+## is way too old.  We need libstdc++ to have GLIBCXX up to 3.4.28
+## and CXXABI up to 1.3.12.
 prepend-path    PATH            $topdir/bin
-
+prepend-path    LD_LIBRARY_PATH $topdir
+prepend-path    LD_LIBRARY_PATH /vol/apps/gcc/gcc-9.2.0/lib64

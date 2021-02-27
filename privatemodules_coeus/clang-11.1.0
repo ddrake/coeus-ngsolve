@@ -18,5 +18,6 @@ module-whatis	"This module sets the environment for the clang/clang++ compiler"
 set     version      "3.2.10"
 set     topdir       ~/local/llvm-project/install
 
+# see clang_notes.txt in coeus_ngsolve
 prepend-path    PATH            $topdir/bin
-
+prepend-path    LD_LIBRARY_PATH /vol/apps/gcc/gcc-9.2.0/lib/:/vol/apps/gcc/gcc-9.2.0/lib64:/vol/apps/gcc/gcc-9.2.0/lib/gcc/x86_64-redhat-linux/9.2.0:/usr/lib/gcc/x86_64-redhat-linux/4.8.5:$topdir/lib

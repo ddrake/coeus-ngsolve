@@ -85,9 +85,6 @@ cp -r ~/coeus-ngsolve/privatemodules_gaia ~/ && mv ~/privatemodules_coeus ~/priv
 It's a good idea to check the last line of each of the module files to ensure that the Python minor version
 (e.g. 3.8) associated with NGSolve matches the version you installed in Step 4.
  
-The modules `ngsolve/serial`, `ngsolve/parallel` and `ngsolve/phi_serial` should now appear if you type `module avail`.
-
-
 ### Step 4
 
 Edit the file `~/.bashrc` on the cluster node using nano, vim or emacs, pasting in the following lines.  If you
@@ -100,7 +97,7 @@ don't know any of these editors, use `nano ~/.bashrc`.
 
 export COMMON_INSTALL_DIR=~/common/install
 
-export PATH=$COMMON/bin:$PATH
+export PATH=$COMMON_INSTALL_DIR/bin:$PATH
 
 export LD_LIBRARY_PATH=$COMMON_INSTALL_DIR/lib:$LD_LIBRARY_PATH
 
@@ -111,9 +108,11 @@ module use --append $HOME/privatemodules
 
 Source these changes by `source ~/.bashrc`
 
+The modules `ngsolve/serial`, `ngsolve/parallel` and `ngsolve/phi_serial` should now appear if you type `module avail`.
+
 ### Step 5
 
-Run `install_cmake3 3.1.3` to install cmake3 in a 'common' directory 
+Run `./install_cmake3 3.1.3` to install cmake3 in a 'common' directory 
 in your `$HOME` folder (see the tree above).
 
 Note: Cmake 3.1.3 is not a recent version, but we need to install it first because recent
@@ -121,7 +120,7 @@ versions of Cmake won't boostrap from the very old CMake on the Coeus or Gaia.
 
 Now if you do `which cmake`, you should see `~/common/install/bin/cmake`
 
-and if you do cmake --version, you should see
+and if you do `cmake --version`, you should see
 `cmake version 3.1.3`
 
 Now you're ready to install a higher CMake version by running the install script again.
@@ -171,7 +170,7 @@ git clone https://bitbucket.org/jayggg/pyeigfeast.git
 ### Step 9
 
 Open `install_ngsolve_serial` in an editor to make sure the cmake command is to your liking.
-The Pardiso sparse solver is recommended, but does not appear to be available on Gaia.  On Gaia, UMFPack should be enabled instead.
+The Intel MKL Pardiso sparse solver is recommended, but does not appear to be available on Gaia.  On Gaia, UMFPack should be enabled instead.
 
 run `install_ngsolve_serial` to install Netgen/Ngsolve for most purposes.
 
